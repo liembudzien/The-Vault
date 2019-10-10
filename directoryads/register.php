@@ -22,7 +22,9 @@
     <link rel="stylesheet" href="css/rangeslider.css">
 
     <link rel="stylesheet" href="css/style.css">
-    
+    <style>
+      .error {color: #FF0000;}
+    </style>
   </head>
   <body>
   
@@ -102,10 +104,13 @@
     </div>  
 
     <div class="container">
+      <!-- php code for submitting -->
     <?php
-        $yvalid = "form-control is-valid";
+        //vars for changing the form box colors
+        $yvalid = "form-control is-valid"; 
         $invalid = "form-control is-invalid";
         $emp = "form-control";
+        //vars for the inputs and the error messages 
         $errEmail = $errPass= $errName="";
         $email = $name = $password = "";
         
@@ -120,16 +125,17 @@
                 $errName= 'Please enter your user name';
                 $valid=false;
             }
-            // Check if email has been entered and is valid
+            // Check if email has been entered and is valid -- this is already checked more by the code, so mostly useless
             if(empty($_POST['email'])){
                 $errEmail = 'Please enter a valid email address';
                 $valid=false;
             }
-            // check if a valid password has been entered
+            // check if a valid password has been entered -- again checked by other code
             if(empty($_POST['password']) || (preg_match("/^.*(?=.{8,})(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).*$/", $_POST["password"]) === 0)) {
                 $errPass = '<p class="errText">Password must be at least 8 characters and must contain at least one lower case letter, one upper case letter and one digit</p>';
                 $valid=false;
             }
+            //message to say that the form has been submitted 
             if($valid){
                 echo "The form has been submitted";
             }
@@ -145,47 +151,79 @@
             <h2 class="mb-5 text-black">Register</h2>
 
             <!-- <form action="#" class="p-5 bg-white"> -->
+
+            <!-- start of form code -->
             <form role="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" class="p-5 bg-white" >
             
+            <!-- Email box -->
             <div class="form-group row">
                 <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail" name="email" title="All emails must have @ and . " pattern="^[^@]+@[^@]+\.[^@]+$" placeholder="Email" value="<?php echo $email; ?>" autofocus>
-                    <?php echo $errEmail;?>
+                    <input type="email" id="inputEmail" name="email" 
+                    title="All emails must have @ and . " pattern="^[^@]+@[^@]+\.[^@]+$" placeholder="Email" class="<?php 
+                      if($errEmail == "" && ($email != "")){ //if there is no error set and a email has been entered
+                        echo $yvalid; //change box to green
+                      }
+                      else if($errEmail != ""){ //if there is an error message outprinted 
+                        echo $invalid; //change box to red
+                      }
+                      else{
+                        echo $emp;//otherwise have box grey
+                      } ?>" 
+                    value="<?php echo $email; ?>" autofocus> <!-- title tells what the issue is if the text entered doesn't match the pattern, 
+                    pattern is a regrex saying that it must be at least one to many nums of chars followed by @ followed by at least one to many num of char followed by . followed by at least one to many chars  
+                    value says retain the inputed value even when the form does not pass validation-->
+                    <span class="error"> <?php echo $errEmail;?> </span>   <!-- if it fails validation, print out the error message in red-->
                 </div>
             </div>
-            
+        
+            <!-- Username box -->
             <div class="form-group row">
                 <label for="inputUser" class="col-sm-2 col-form-label">Username</label>
                 <div class="col-sm-10">
                     <input type="text"  id="inputUser" name="user" placeholder="Username" class="<?php 
-                      if($errName == "" && ($name != "")){
-                        echo $yvalid;
+                      if($errName == "" && ($name != "")){ //if there is no error set and a name has been entered
+                        echo $yvalid; //change box to green
                       }
-                      else if($errName != ""){
-                        echo $invalid;
+                      else if($errName != ""){ //if there is an error message outprinted 
+                        echo $invalid; //change box to red
                       }
                       else{
-                        echo $emp;
+                        echo $emp;//otherwise have box grey
                       } ?>" 
-                    value="<?php echo $name; ?>">
-                    <?php echo $errName; ?>
+                    value="<?php echo $name; ?>" autofocus> 
+                   <span class="error"> <?php echo $errName; ?> </span>
                 </div>
             </div>
 
+            <!-- Password box -->
             <div class="form-group row">
                 <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}" title="must be 8 char long, one upper, one lower, and at least 1 number" value="<?php echo $password; ?>">
-                    <?php echo $errPass; ?>
+                    <input type="password" id="inputPassword" name="password" placeholder="Password" 
+                    pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}" 
+                    title="must be 8 char long, one upper, one lower, and at least 1 number" value="<?php echo $password; ?>" class="<?php 
+                      if($errPass == "" && ($password != "")){ //if there is no error set and a password has been entered
+                        echo $yvalid; //change box to green
+                      }
+                      else if($errPass != ""){ //if there is an error message outprinted 
+                        echo $invalid; //change box to red
+                      } 
+                      else{
+                        echo $emp;//otherwise have box grey
+                      }  ?>" 
+                    autofocus> 
+                    <span class="error"> <?php echo $errPass; ?> </span> 
                 </div>
             </div>
 
+            <!-- button box -->
             <div class="form-group row">
                 <div class="offset-sm-2 col-sm-10">
                     <input type="submit" value="Register" name="submit" class="btn btn-primary"/>
                 </div>
             </div>
+
              <!--  
                <div class="form-group has-success has-feedback row">
             <label class="col-sm-2 control-label" for="inputpassword">
