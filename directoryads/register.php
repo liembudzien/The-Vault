@@ -111,8 +111,8 @@
         $invalid = "form-control is-invalid";
         $emp = "form-control";
         //vars for the inputs and the error messages 
-        $errEmail = $errPass= $errName="";
-        $email = $name = $password = "";
+        $errEmail = $errPass= $errName= $errAddr="";
+        $email = $name = $password = $address= "";
         
         if(isset($_POST["submit"])) {
             $email = $_POST['email'];
@@ -139,7 +139,7 @@
             
             // Check if address has been entered and matches correct format
             if(empty($_POST['address']) || (preg_match("/^\d+\s[A-z]+\s[A-z]+/", $_POST["address"]) === 0) ){
-                $errAddr= '<p class="errText">Address must contain address number and street name.</p>';
+                $errAddr= '<p class="errText">Address must contain address number and street name and street type (i.e. dr, blvd, etc.).</p>';
                 $valid=false;
             }
             
@@ -201,7 +201,7 @@
                         echo $emp;//otherwise have box grey
                       } ?>" 
                     value="<?php echo $name; ?>" autofocus> 
-                   <span class="error"> <?php echo $errName; ?> </span>
+                    <span class="error"> <?php echo $errName; ?> </span>
                 </div>
             </div>
 
@@ -232,7 +232,7 @@
                 <label for="inputAddress" class="col-sm-2 col-form-label">Address</label>
                 <div class="col-sm-10">
                     <input type="address" id="inputAddress" name="address" placeholder="Address" 
-                    title="must have a street address with number and street name" value="<?php echo $password; ?>" class="<?php 
+                    title="must have a street address with number and street name" value="<?php echo $address; ?>" class="<?php 
                       if($errAddr == "" && ($Addr != "")){ //if there is no error set and a password has been entered
                         echo $yvalid; //change box to green
                       }
@@ -243,7 +243,7 @@
                         echo $emp;//otherwise have box grey
                       }  ?>" 
                     autofocus> 
-                    <span class="error"> <?php echo $errPass; ?> </span> 
+                    <span class="error"> <?php echo $errAddr; ?> </span> 
                 </div>
             </div>
 
@@ -254,8 +254,8 @@
                 </div>
             </div>
 
-             <!--  
-               <div class="form-group has-success has-feedback row">
+              <!--  
+                <div class="form-group has-success has-feedback row">
             <label class="col-sm-2 control-label" for="inputpassword">
                   Password</label>
             <div class="col-sm-10">
