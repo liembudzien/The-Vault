@@ -111,7 +111,7 @@
         $invalid = "form-control is-invalid";
         $emp = "form-control";
         //vars for the inputs and the error messages 
-        $errEmail = $errPass= $errName= $errAddr="";
+        $errEmail = $errPass= $errName= $errAddr= $errZipcode= "";
         $email = $name = $password = $address= "";
         
         if(isset($_POST["submit"])) {
@@ -240,7 +240,7 @@
                 <div class="col-sm-10">
                     <input type="address" id="inputAddress" name="address" placeholder="Address" 
                     title="must have a street address with number and street name" value="<?php echo $address; ?>" class="<?php 
-                      if($errAddr == "" && ($Addr != "")){ //if there is no error set and a password has been entered
+                      if($errAddr == "" && ($address != "")){ //if there is no error set and an address has been entered
                         echo $yvalid; //change box to green
                       }
                       else if($errAddr != ""){ //if there is an error message outprinted 
