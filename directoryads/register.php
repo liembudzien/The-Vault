@@ -120,6 +120,7 @@
             $password = $_POST['password'];
             $valid=true;
             $address = $_POST['address'];
+            $zipcode = $_POST['zipcode'];
 
             // Check if name has been entered
             if(empty($_POST['user'])){
@@ -140,6 +141,12 @@
             // Check if address has been entered and matches correct format
             if(empty($_POST['address']) || (preg_match("/^\d+\s[A-z]+\s[A-z]+/", $_POST["address"]) === 0) ){
                 $errAddr= '<p class="errText">Address must contain address number and street name.</p>';
+                $valid=false;
+            }
+            
+            // Check if zipcode has been entered in the correct format
+            if(empty($_POST['zipcode']) || (preg_match("/^\d{5}$/", $_POST["zipcode"]) === 0) ){
+                $errZipcode= '<p class="errText">Zipcode must be 5 numbers</p>';
                 $valid=false;
             }
             
@@ -244,6 +251,26 @@
                       }  ?>" 
                     autofocus> 
                     <span class="error"> <?php echo $errPass; ?> </span> 
+                </div>
+            </div>
+                
+            <!-- Zip code box -->
+            <div class="form-group row">
+                <label for="inputZip" class="col-sm-2 col-form-label">Zipcode</label>
+                <div class="col-sm-10">
+                    <input type="zipcode" id="inputzip" name="zipcode" placeholder="Zipcode" 
+                    title="must be a five number zipcode" value="<?php echo $zipcode; ?>" class="<?php 
+                      if($errZipcode == "" && ($zipcode != "")){ //if there is no error set and a password has been entered
+                        echo $yvalid; //change box to green
+                      }
+                      else if($errZipcode != ""){ //if there is an error message outprinted 
+                        echo $invalid; //change box to red
+                      } 
+                      else{
+                        echo $emp;//otherwise have box grey
+                      }  ?>" 
+                    autofocus> 
+                    <span class="error"> <?php echo $errZipcode; ?> </span> 
                 </div>
             </div>
 
