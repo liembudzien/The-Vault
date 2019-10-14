@@ -111,8 +111,8 @@
         $invalid = "form-control is-invalid";
         $emp = "form-control";
         //vars for the inputs and the error messages 
-        $errEmail = $errPass= $errName= $errAddr="";
-        $email = $name = $password = $address= "";
+        $errEmail = $errPass= $errName= $errAddr= $errState="";
+        $email = $name = $password = $address= $state= "";
         
         if(isset($_POST["submit"])) {
             $email = $_POST['email'];
@@ -120,10 +120,11 @@
             $password = $_POST['password'];
             $valid=true;
             $address = $_POST['address'];
+            $state = $_POST['state'];
 
             // Check if name has been entered
-            if(empty($_POST['user'])){
-                $errName= 'Please enter your user name';
+            if(empty($_POST['user']) || (preg_match("/...../", $_POST["user"]) === 0)) {
+                $errName= 'Please enter your name. No sepcial characters (!, @, #, etc.) or numbers.';
                 $valid=false;
             }
             // Check if email has been entered and is valid -- this is already checked more by the code, so mostly useless
@@ -142,7 +143,11 @@
                 $errAddr= '<p class="errText">Address must contain address number and street name and street type (i.e. dr, blvd, etc.).</p>';
                 $valid=false;
             }
-            
+            //check for state input 
+            if(empty($_POST['state'])) {
+              $errState= '<p class="errText">Please select a state';
+              $valid=false;
+          }
             //message to say that the form has been submitted 
             if($valid){
                 echo "The form has been submitted";
@@ -186,9 +191,9 @@
                 </div>
             </div>
         
-            <!-- Username box -->
+            <!-- name box -->
             <div class="form-group row">
-                <label for="inputUser" class="col-sm-2 col-form-label">Username</label>
+                <label for="inputUser" class="col-sm-2 col-form-label">Name</label>
                 <div class="col-sm-10">
                     <input type="text"  id="inputUser" name="user" placeholder="Username" class="<?php 
                       if($errName == "" && ($name != "")){ //if there is no error set and a name has been entered
@@ -207,7 +212,8 @@
 
             <!-- Password box -->
             <div class="form-group row">
-            <!--  pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}" 
+            <!-- old pattern and stuff -- NOT NEEDED 
+              pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}" 
                     title="must be 8 char long, one upper, one lower, and at least 1 number"-->
                 <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                 <div class="col-sm-10">
@@ -233,7 +239,7 @@
                 <div class="col-sm-10">
                     <input type="address" id="inputAddress" name="address" placeholder="Address" 
                     title="must have a street address with number and street name" value="<?php echo $address; ?>" class="<?php 
-                      if($errAddr == "" && ($Addr != "")){ //if there is no error set and a password has been entered
+                      if($errAddr == "" && ($address != "")){ //if there is no error set and a password has been entered
                         echo $yvalid; //change box to green
                       }
                       else if($errAddr != ""){ //if there is an error message outprinted 
@@ -245,6 +251,28 @@
                     autofocus> 
                     <span class="error"> <?php echo $errAddr; ?> </span> 
                 </div>
+            </div>
+            <!-- State selection -->
+            <div class="form-group row">
+              <label for="inputState" class="col-sm-2 col-form-label">State</label>
+              <div class="col-sm-10">
+                <select id="inputState" name="state"  title="Must Select a state" class="<?php 
+                      if($errState == "" && ($state != "")){ //if there is no error set and a password has been entered
+                        echo $yvalid; //change box to green
+                      }
+                      else if($errState != ""){ //if there is an error message outprinted 
+                        echo $invalid; //change box to red
+                      } 
+                      else{
+                        echo $emp;//otherwise have box grey
+                      }  ?>" 
+                    autofocus> 
+                  <option selected>Choose...</option>
+                  <option>...</option> <!-- Add the states here -->
+                  <option>....</option>
+                </select>
+                <span class="error"> <?php echo $errState;?> </span>
+              </div>
             </div>
 
             <!-- button box -->
