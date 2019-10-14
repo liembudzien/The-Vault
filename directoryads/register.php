@@ -267,7 +267,7 @@
                         echo $emp;//otherwise have box grey
                       }  ?>" 
                     autofocus> 
-                  <option selected>Choose...</option>
+                  <option selected></option>
                   <option>...</option> <!-- Add the states here -->
                   <option>....</option>
                 </select>
