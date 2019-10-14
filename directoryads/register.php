@@ -111,7 +111,7 @@
         $invalid = "form-control is-invalid";
         $emp = "form-control";
         //vars for the inputs and the error messages 
-        $errEmail = $errPass= $errName= $errAddr= $errState="";
+        $errEmail = $errPass= $errName= $errAddr= $errZipcode= $errState="";
         $email = $name = $password = $address= $state= "";
         
         if(isset($_POST["submit"])) {
@@ -121,6 +121,7 @@
             $valid=true;
             $address = $_POST['address'];
             $state = $_POST['state'];
+            $zipcode = $_POST['zipcode'];
 
             // Check if name has been entered
             if(empty($_POST['user']) || (preg_match("/...../", $_POST["user"]) === 0)) {
@@ -148,7 +149,14 @@
               $errState= '<p class="errText">Please select a state';
               $valid=false;
           }
-            //message to say that the form has been submitted 
+            
+            // Check if zipcode has been entered in the correct format
+            if(empty($_POST['zipcode']) || (preg_match("/^\d{5}$/", $_POST["zipcode"]) === 0) ){
+                $errZipcode= '<p class="errText">Zipcode must be 5 numbers</p>';
+                $valid=false;
+            }
+            
+          //message to say that the form has been submitted 
             if($valid){
                 echo "The form has been submitted";
             }
@@ -239,7 +247,7 @@
                 <div class="col-sm-10">
                     <input type="address" id="inputAddress" name="address" placeholder="Address" 
                     title="must have a street address with number and street name" value="<?php echo $address; ?>" class="<?php 
-                      if($errAddr == "" && ($address != "")){ //if there is no error set and a password has been entered
+                      if($errAddr == "" && ($address != "")){ //if there is no error set and an address has been entered
                         echo $yvalid; //change box to green
                       }
                       else if($errAddr != ""){ //if there is an error message outprinted 
@@ -252,6 +260,27 @@
                     <span class="error"> <?php echo $errAddr; ?> </span> 
                 </div>
             </div>
+                
+            <!-- Zip code box -->
+            <div class="form-group row">
+                <label for="inputZip" class="col-sm-2 col-form-label">Zipcode</label>
+                <div class="col-sm-10">
+                    <input type="zipcode" id="inputzip" name="zipcode" placeholder="Zipcode" 
+                    title="must be a five number zipcode" value="<?php echo $zipcode; ?>" class="<?php 
+                      if($errZipcode == "" && ($zipcode != "")){ //if there is no error set and a password has been entered
+                        echo $yvalid; //change box to green
+                      }
+                      else if($errZipcode != ""){ //if there is an error message outprinted 
+                        echo $invalid; //change box to red
+                      } 
+                      else{
+                        echo $emp;//otherwise have box grey
+                      }  ?>" 
+                    autofocus> 
+                    <span class="error"> <?php echo $errZipcode; ?> </span> 
+                </div>
+            </div>
+
             <!-- State selection -->
             <div class="form-group row">
               <label for="inputState" class="col-sm-2 col-form-label">State</label>
@@ -267,14 +296,12 @@
                         echo $emp;//otherwise have box grey
                       }  ?>" 
                     autofocus> 
-                  <option selected></option>
+                    <option selected></option>
                   <option>...</option> <!-- Add the states here -->
                   <option>....</option>
                 </select>
                 <span class="error"> <?php echo $errState;?> </span>
               </div>
-            </div>
-
             <!-- button box -->
             <div class="form-group row">
                 <div class="offset-sm-2 col-sm-10">
