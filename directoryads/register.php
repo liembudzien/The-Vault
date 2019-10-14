@@ -119,6 +119,7 @@
             $name = $_POST['user'];
             $password = $_POST['password'];
             $valid=true;
+            $address = $_POST['address'];
 
             // Check if name has been entered
             if(empty($_POST['user'])){
@@ -135,6 +136,13 @@
                 $errPass = '<p class="errText">Password must be at least 8 characters and must contain at least one lower case letter, one upper case letter and one digit</p>';
                 $valid=false;
             }
+            
+            // Check if address has been entered and matches correct format
+            if(empty($_POST['address']) || (preg_match("/^\d+\s[A-z]+\s[A-z]+/", $_POST["address"]) === 0) ){
+                $errAddr= '<p class="errText">Address must contain address number and street name.</p>';
+                $valid=false;
+            }
+            
             //message to say that the form has been submitted 
             if($valid){
                 echo "The form has been submitted";
@@ -207,6 +215,26 @@
                         echo $yvalid; //change box to green
                       }
                       else if($errPass != ""){ //if there is an error message outprinted 
+                        echo $invalid; //change box to red
+                      } 
+                      else{
+                        echo $emp;//otherwise have box grey
+                      }  ?>" 
+                    autofocus> 
+                    <span class="error"> <?php echo $errPass; ?> </span> 
+                </div>
+            </div>
+                
+            <!-- Address box -->
+            <div class="form-group row">
+                <label for="inputAddress" class="col-sm-2 col-form-label">Address</label>
+                <div class="col-sm-10">
+                    <input type="address" id="inputAddress" name="address" placeholder="Address" 
+                    title="must have a street address with number and street name" value="<?php echo $password; ?>" class="<?php 
+                      if($errAddr == "" && ($Addr != "")){ //if there is no error set and a password has been entered
+                        echo $yvalid; //change box to green
+                      }
+                      else if($errAddr != ""){ //if there is an error message outprinted 
                         echo $invalid; //change box to red
                       } 
                       else{
