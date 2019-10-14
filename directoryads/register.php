@@ -103,7 +103,7 @@
       </div>
     </div>  
 
-    <div class="container">
+    <!-- <div class="container"> -->
       <!-- php code for submitting -->
     <?php
         //vars for changing the form box colors
@@ -126,8 +126,8 @@
                 $valid=false;
             }
             // Check if email has been entered and is valid -- this is already checked more by the code, so mostly useless
-            if(empty($_POST['email'])){
-                $errEmail = 'Please enter a valid email address';
+            if(empty($_POST['email']) || (preg_match("/^[^@]+@[^@]+\.[^@]+$/", $_POST["email"]) === 0)) {
+                $errEmail = '<p class="errText"> All emails must have a @ and a .';
                 $valid=false;
             }
             // check if a valid password has been entered -- again checked by other code
@@ -159,8 +159,9 @@
             <div class="form-group row">
                 <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10">
-                    <input type="email" id="inputEmail" name="email" 
-                    title="All emails must have @ and . " pattern="^[^@]+@[^@]+\.[^@]+$" placeholder="Email" class="<?php 
+                <!--   title="All emails must have @ and . " pattern="^[^@]+@[^@]+\.[^@]+$" -->
+                    <input type="text" id="inputEmail" name="email" 
+                  placeholder="Email" class="<?php 
                       if($errEmail == "" && ($email != "")){ //if there is no error set and a email has been entered
                         echo $yvalid; //change box to green
                       }
@@ -198,11 +199,12 @@
 
             <!-- Password box -->
             <div class="form-group row">
+            <!--  pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}" 
+                    title="must be 8 char long, one upper, one lower, and at least 1 number"-->
                 <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                 <div class="col-sm-10">
                     <input type="password" id="inputPassword" name="password" placeholder="Password" 
-                    pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}" 
-                    title="must be 8 char long, one upper, one lower, and at least 1 number" value="<?php echo $password; ?>" class="<?php 
+                    value="<?php echo $password; ?>" class="<?php 
                       if($errPass == "" && ($password != "")){ //if there is no error set and a password has been entered
                         echo $yvalid; //change box to green
                       }
