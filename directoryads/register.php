@@ -279,26 +279,6 @@
                     <span class="error"> <?php echo $errAddr; ?> </span> 
                 </div>
             </div>
-                
-            <!-- Zip code box -->
-            <div class="form-group row">
-                <label for="inputZip" class="col-sm-2 col-form-label">Zipcode</label>
-                <div class="col-sm-10">
-                    <input type="zipcode" id="inputzip" name="zipcode" placeholder="Zipcode" 
-                    title="must be a five number zipcode" value="<?php echo $zipcode; ?>" class="<?php 
-                      if($errZipcode == "" && ($zipcode != "")){ //if there is no error set and a password has been entered
-                        echo $yvalid; //change box to green
-                      }
-                      else if($errZipcode != ""){ //if there is an error message outprinted 
-                        echo $invalid; //change box to red
-                      } 
-                      else{
-                        echo $emp;//otherwise have box grey
-                      }  ?>" 
-                    autofocus> 
-                    <span class="error"> <?php echo $errZipcode; ?> </span> 
-                </div>
-            </div>
 
             <!-- State selection -->
             <div class="form-group row">
@@ -371,6 +351,27 @@
                 </select>
                 <span class="error"> <?php echo $errState;?> </span>
               </div>
+            </div>
+                
+                        <!-- Zip code box -->
+            <div class="form-group row">
+                <label for="inputZip" class="col-sm-2 col-form-label">Zipcode</label>
+                <div class="col-sm-10">
+                    <input type="zipcode" id="inputzip" name="zipcode" placeholder="Zipcode" 
+                    title="must be a five number zipcode" value="<?php echo $zipcode; ?>" class="<?php 
+                      if($errZipcode == "" && ($zipcode != "")){ //if there is no error set and a password has been entered
+                        echo $yvalid; //change box to green
+                      }
+                      else if($errZipcode != ""){ //if there is an error message outprinted 
+                        echo $invalid; //change box to red
+                      } 
+                      else{
+                        echo $emp;//otherwise have box grey
+                      }  ?>" 
+                    autofocus> 
+                    <span class="error"> <?php echo $errZipcode; ?> </span> 
+                </div>
+            </div>
             <!-- button box -->
             <div class="form-group row">
                 <div class="offset-sm-2 col-sm-10">
@@ -425,7 +426,7 @@
 
   
             </form>
-          </div>
+                </div>
           
         </div>
       </div>
