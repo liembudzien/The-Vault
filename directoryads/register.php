@@ -111,7 +111,7 @@
         $invalid = "form-control is-invalid";
         $emp = "form-control";
         //vars for the inputs and the error messages 
-        $errEmail = $errPass= $errName= $errAddr= $errZipcode= $errState="";
+        $errEmail = $errPass= $errName= $errAddr= $errZipcode= $errState= $errDuplicate= "";
         $email = $name = $password = $address= $state= $zipcode= "";
         
         if(isset($_POST["submit"])) {
@@ -126,15 +126,17 @@
             $db_connection = pg_connect("host=ec2-174-129-227-80.compute-1.amazonaws.com port=5432 dbname=d81pqnbohorfk0 user=ddsgwogqfbfyyv password=751ab46d5dac57762560abf99367ea2cac7cf7e81ebab8719935e8d7fd244db3");
 
             // Check if name has been entered
-            if(empty($_POST['user']) || (preg_match("/...../", $_POST["user"]) === 0)) {
+            if(empty($_POST['user']) || (preg_match("/^([a-zA-Z0-9]+|[a-zA-Z0-9]+\s{1}[a-zA-Z0-9]{1,}|[a-zA-Z0-9]+\s{1}[a-zA-Z0-9]{3,}\s{1}[a-zA-Z0-9]{1,})$/", $_POST["user"]) === 0)) {
                 $errName= 'Please enter your name. No sepcial characters (!, @, #, etc.) or numbers.';
                 $valid=false;
             }
+            
             // Check if email has been entered and is valid -- this is already checked more by the code, so mostly useless
             if(empty($_POST['email']) || (preg_match("/^[^@]+@[^@]+\.[^@]+$/", $_POST["email"]) === 0)) {
-                $errEmail = '<p class="errText"> All emails must have a @ and a .';
+                $errEmail = '<p class="errText"> All emails must have a @ and a .</p>';
                 $valid=false;
             }
+            
             // check if a valid password has been entered -- again checked by other code
             if(empty($_POST['password']) || (preg_match("/^.*(?=.{8,})(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).*$/", $_POST["password"]) === 0)) {
                 $errPass = '<p class="errText">Password must be at least 8 characters and must contain at least one lower case letter, one upper case letter and one digit</p>';
@@ -158,8 +160,16 @@
                 $valid=false;
             }
             
-            $query = "INSERT INTO users VALUES ('$name', '$email', '$address', '$state', '$state',  '$zipcode', '$password')";
-            $result = pg_query($db_connection, $query);
+            $test = pg_query($db_connection, "SELECT * from users where email='$email'");
+            $num_rows = pg_affected_rows($test);
+            if($num_rows > 0){
+                $errDuplicate = '<p class="errText">Duplicate email address</p>';
+                $valid=false;
+            }
+            else{
+                $query = "INSERT INTO users VALUES ('$name', '$email', '$address', '$state', '$state',  '$zipcode', '$password')";
+                $result = pg_query($db_connection, $query);
+            }
             
           //message to say that the form has been submitted 
             if($valid){
@@ -188,11 +198,14 @@
                 <!--   title="All emails must have @ and . " pattern="^[^@]+@[^@]+\.[^@]+$" -->
                     <input type="text" id="inputEmail" name="email" 
                   placeholder="Email" class="<?php 
-                      if($errEmail == "" && ($email != "")){ //if there is no error set and a email has been entered
+                      if($errEmail == "" && ($email != "") && $errDuplicate == ""){ //if there is no error set and a email has been entered
                         echo $yvalid; //change box to green
                       }
                       else if($errEmail != ""){ //if there is an error message outprinted 
                         echo $invalid; //change box to red
+                      }
+                      else if($errDuplicate != ""){
+                        echo $invalid;
                       }
                       else{
                         echo $emp;//otherwise have box grey
@@ -201,6 +214,7 @@
                     pattern is a regrex saying that it must be at least one to many nums of chars followed by @ followed by at least one to many num of char followed by . followed by at least one to many chars  
                     value says retain the inputed value even when the form does not pass validation-->
                     <span class="error"> <?php echo $errEmail;?> </span>   <!-- if it fails validation, print out the error message in red-->
+                    <span class="error"> <?php echo $errDuplicate;?> </span>
                 </div>
             </div>
         
@@ -208,7 +222,7 @@
             <div class="form-group row">
                 <label for="inputUser" class="col-sm-2 col-form-label">Name</label>
                 <div class="col-sm-10">
-                    <input type="text"  id="inputUser" name="user" placeholder="Username" class="<?php 
+                    <input type="text"  id="inputUser" name="user" placeholder="Full Name" class="<?php 
                       if($errName == "" && ($name != "")){ //if there is no error set and a name has been entered
                         echo $yvalid; //change box to green
                       }
@@ -257,7 +271,7 @@
                       }
                       else if($errAddr != ""){ //if there is an error message outprinted 
                         echo $invalid; //change box to red
-                      } 
+                      }                                                                                                      
                       else{
                         echo $emp;//otherwise have box grey
                       }  ?>" 
