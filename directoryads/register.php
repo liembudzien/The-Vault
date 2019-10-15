@@ -167,7 +167,7 @@
                 $valid=false;
             }
             else{
-                $query = "INSERT INTO users VALUES ('$name', '$email', '$address', '$state', '$state',  '$zipcode', '$password')";
+                $query = "INSERT INTO users VALUES ('$name', '$email', '$address', '$state', '$state',  '$zipcode', '$hashed_password')";
                 $result = pg_query($db_connection, $query);
             }
             
