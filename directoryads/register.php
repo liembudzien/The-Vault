@@ -111,8 +111,8 @@
         $invalid = "form-control is-invalid";
         $emp = "form-control";
         //vars for the inputs and the error messages 
-        $errEmail = $errPass= $errName= $errAddr= $errZipcode= $errState= $errDuplicate= "";
-        $email = $name = $password = $address= $state= $zipcode= "";
+        $errEmail = $errPass= $errName= $errAddr= $errZipcode= $errState= $errDuplicate = $errCity= "";
+        $email = $name = $password = $address= $state= $zipcode= $city= "";
         
         if(isset($_POST["submit"])) {
             $email = $_POST['email'];
@@ -122,12 +122,13 @@
             $valid=true;
             $address = $_POST['address'];
             $state = $_POST['state'];
+            $city = $_POST['city'];
             $zipcode = $_POST['zipcode'];
             $db_connection = pg_connect("host=ec2-174-129-227-80.compute-1.amazonaws.com port=5432 dbname=d81pqnbohorfk0 user=ddsgwogqfbfyyv password=751ab46d5dac57762560abf99367ea2cac7cf7e81ebab8719935e8d7fd244db3");
 
             // Check if name has been entered
-            if(empty($_POST['user']) || (preg_match("/^([a-zA-Z0-9]+|[a-zA-Z0-9]+\s{1}[a-zA-Z0-9]{1,}|[a-zA-Z0-9]+\s{1}[a-zA-Z0-9]{3,}\s{1}[a-zA-Z0-9]{1,})$/", $_POST["user"]) === 0)) {
-                $errName= 'Please enter your name. No sepcial characters (!, @, #, etc.) or numbers.';
+            if(empty($_POST['user']) || (preg_match("/^([a-zA-Z]+\s^[a-zA-Z]+/", $_POST["user"]) === 0)) {
+                $errName= 'Please enter your first and last name separated by a space. No sepcial characters (!, @, #, etc.) or numbers.';
                 $valid=false;
             }
             
@@ -148,6 +149,11 @@
                 $errAddr= '<p class="errText">Address must contain address number and street name and street type (i.e. dr, blvd, etc.).</p>';
                 $valid=false;
             }
+            // Check if name has been entered
+            if(empty($_POST['city']) || (preg_match("/^([a-zA-Z]+\s^[a-zA-Z]+/", $_POST["city"]) === 0)) {
+              $errCity= 'Please enter your city. No sepcial characters (!, @, #, etc.) or numbers.';
+              $valid=false;
+            }
             //check for state input 
             if(empty($_POST['state'])) {
               $errState= '<p class="errText">Please select a state';
@@ -167,7 +173,7 @@
                 $valid=false;
             }
             else{
-                $query = "INSERT INTO users VALUES ('$name', '$email', '$address', '$state', '$state',  '$zipcode', '$hashed_password')";
+                $query = "INSERT INTO users VALUES ('$name', '$email', '$address', '$city', '$state',  '$zipcode', '$hashed_password')";
                 $result = pg_query($db_connection, $query);
             }
             
@@ -279,7 +285,24 @@
                     <span class="error"> <?php echo $errAddr; ?> </span> 
                 </div>
             </div>
-
+              <!-- City box-->
+              <div class="form-group row">
+                <label for="inputCity" class="col-sm-2 col-form-label">City</label>
+                <div class="col-sm-10">
+                    <input type="text"  id="inputCity" name="city" placeholder="City" class="<?php 
+                      if($errCity == "" && ($city != "")){ //if there is no error set and a name has been entered
+                        echo $yvalid; //change box to green
+                      }
+                      else if($errCity != ""){ //if there is an error message outprinted 
+                        echo $invalid; //change box to red
+                      }
+                      else{
+                        echo $emp;//otherwise have box grey
+                      } ?>" 
+                    value="<?php echo $city; ?>" autofocus> 
+                    <span class="error"> <?php echo $errCity; ?> </span>
+                </div>
+            </div>
             <!-- State selection -->
             <div class="form-group row">
               <label for="inputState" class="col-sm-2 col-form-label">State</label>
@@ -372,6 +395,7 @@
                     <span class="error"> <?php echo $errZipcode; ?> </span> 
                 </div>
             </div>
+           
             <!-- button box -->
             <div class="form-group row">
                 <div class="offset-sm-2 col-sm-10">
