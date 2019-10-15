@@ -112,16 +112,18 @@
         $emp = "form-control";
         //vars for the inputs and the error messages 
         $errEmail = $errPass= $errName= $errAddr= $errZipcode= $errState="";
-        $email = $name = $password = $address= $state= "";
+        $email = $name = $password = $address= $state= $zipcode= "";
         
         if(isset($_POST["submit"])) {
             $email = $_POST['email'];
             $name = $_POST['user'];
             $password = $_POST['password'];
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
             $valid=true;
             $address = $_POST['address'];
             $state = $_POST['state'];
             $zipcode = $_POST['zipcode'];
+            $db_connection = pg_connect("host=ec2-174-129-227-80.compute-1.amazonaws.com port=5432 dbname=d81pqnbohorfk0 user=ddsgwogqfbfyyv password=751ab46d5dac57762560abf99367ea2cac7cf7e81ebab8719935e8d7fd244db3");
 
             // Check if name has been entered
             if(empty($_POST['user']) || (preg_match("/...../", $_POST["user"]) === 0)) {
@@ -148,13 +150,16 @@
             if(empty($_POST['state'])) {
               $errState= '<p class="errText">Please select a state';
               $valid=false;
-          }
+            }
             
             // Check if zipcode has been entered in the correct format
             if(empty($_POST['zipcode']) || (preg_match("/^\d{5}$/", $_POST["zipcode"]) === 0) ){
                 $errZipcode= '<p class="errText">Zipcode must be 5 numbers</p>';
                 $valid=false;
             }
+            
+            $query = "INSERT INTO users VALUES ('$name', '$email', '$address', '$state', '$state',  '$zipcode', '$password')";
+            $result = pg_query($db_connection, $query);
             
           //message to say that the form has been submitted 
             if($valid){
@@ -297,8 +302,9 @@
                       }  ?>" 
                     autofocus> 
                     <option selected></option>
-                  <option>...</option> <!-- Add the states here -->
-                  <option>....</option>
+                  <option>Alabama</option> <!-- Add the states here -->
+                  <option>Alaska</option>
+                  <option>Arizona</option>
                 </select>
                 <span class="error"> <?php echo $errState;?> </span>
               </div>
