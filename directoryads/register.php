@@ -369,7 +369,137 @@
                   <option>West Virginia</option>
                   <option>Wisconsin</option> 
                   <option>Wyoming</option>  
-                  
+                  <!--My dropdown
+                -
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.dropbtn {
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #2980B9;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+</style>
+</head>
+<body>
+
+<h2>Clickable Dropdown</h2>
+<p>Click on the button to open the dropdown menu.</p>
+
+<div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="#home">Alabama</a>
+    <a href="#about">Alaska</a>
+    <a href="#contact">Arizona</a>
+    <a href="#home">Arkansas</a>
+    <a href="#about">California</a>
+    <a href="#contact">Colorado</a>
+    <a href="#home">Connecticut</a>
+    <a href="#about">Delaware</a>
+    <a href="#contact">Florida</a>
+    <a href="#home">Georgia</a>
+    <a href="#about">Hawaii</a>
+    <a href="#contact">Idaho</a>
+    <a href="#home">Iowa</a>
+    <a href="#about">Kansas</a>
+    <a href="#contact">Kentucky</a>
+    <a href="#home">Louisiana</a>
+    <a href="#about">Maine</a>
+    <a href="#contact">Maryland</a>
+    <a href="#home">Massachusetts</a>
+    <a href="#about">Michigan</a>
+    <a href="#contact">Minnesota</a>
+    <a href="#home">Mississippi</a>
+    <a href="#about">Missouri</a>
+    <a href="#contact">Montana</a>
+    <a href="#home">Nebraska</a>
+    <a href="#about">Nevada</a>
+    <a href="#contact">New Hampshire</a>
+    <a href="#home">New Jersey</a>
+    <a href="#about">New Mexico</a>
+    <a href="#contact">New York</a>
+    <a href="#home">North Carolina</a>
+    <a href="#about">North Dakota</a>
+    <a href="#contact">Ohio</a>
+    <a href="#home">Oklahoma</a>
+    <a href="#about">Oregon</a>
+    <a href="#contact">Pennyslvania</a>
+    <a href="#home">Rhode Island</a>
+    <a href="#about">South Carolina</a>
+    <a href="#contact">South Dakota</a>
+    <a href="#home">Tennessee</a>
+    <a href="#about">Texas</a>
+    <a href="#contact">Utah</a>
+    <a href="#home">Vermont</a>
+    <a href="#about">Virginia</a>
+    <a href="#contact">Washington</a>
+    <a href="#home">West Virginia</a>
+    <a href="#about">Wisconsin</a>
+    <a href="#contact">Wyoming</a>
+  </div>
+</div>
+
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+
+</body>
+</html>
+                -->
                  
                 </select>
                 <span class="error"> <?php echo $errState;?> </span>
