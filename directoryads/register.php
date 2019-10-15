@@ -167,7 +167,7 @@
                 $valid=false;
             }
             else{
-                $query = "INSERT INTO users VALUES ('$name', '$email', '$address', '$state', '$state',  '$zipcode', '$password')";
+                $query = "INSERT INTO users VALUES ('$name', '$email', '$address', '$state', '$state',  '$zipcode', '$hashed_password')";
                 $result = pg_query($db_connection, $query);
             }
             
@@ -277,26 +277,6 @@
                       }  ?>" 
                     autofocus> 
                     <span class="error"> <?php echo $errAddr; ?> </span> 
-                </div>
-            </div>
-                
-            <!-- Zip code box -->
-            <div class="form-group row">
-                <label for="inputZip" class="col-sm-2 col-form-label">Zipcode</label>
-                <div class="col-sm-10">
-                    <input type="zipcode" id="inputzip" name="zipcode" placeholder="Zipcode" 
-                    title="must be a five number zipcode" value="<?php echo $zipcode; ?>" class="<?php 
-                      if($errZipcode == "" && ($zipcode != "")){ //if there is no error set and a password has been entered
-                        echo $yvalid; //change box to green
-                      }
-                      else if($errZipcode != ""){ //if there is an error message outprinted 
-                        echo $invalid; //change box to red
-                      } 
-                      else{
-                        echo $emp;//otherwise have box grey
-                      }  ?>" 
-                    autofocus> 
-                    <span class="error"> <?php echo $errZipcode; ?> </span> 
                 </div>
             </div>
 
@@ -501,6 +481,27 @@ window.onclick = function(event) {
                 </select>
                 <span class="error"> <?php echo $errState;?> </span>
               </div>
+            </div>
+                
+                        <!-- Zip code box -->
+            <div class="form-group row">
+                <label for="inputZip" class="col-sm-2 col-form-label">Zipcode</label>
+                <div class="col-sm-10">
+                    <input type="zipcode" id="inputzip" name="zipcode" placeholder="Zipcode" 
+                    title="must be a five number zipcode" value="<?php echo $zipcode; ?>" class="<?php 
+                      if($errZipcode == "" && ($zipcode != "")){ //if there is no error set and a password has been entered
+                        echo $yvalid; //change box to green
+                      }
+                      else if($errZipcode != ""){ //if there is an error message outprinted 
+                        echo $invalid; //change box to red
+                      } 
+                      else{
+                        echo $emp;//otherwise have box grey
+                      }  ?>" 
+                    autofocus> 
+                    <span class="error"> <?php echo $errZipcode; ?> </span> 
+                </div>
+            </div>
             <!-- button box -->
             <div class="form-group row">
                 <div class="offset-sm-2 col-sm-10">
@@ -555,7 +556,7 @@ window.onclick = function(event) {
 
   
             </form>
-          </div>
+                </div>
           
         </div>
       </div>
