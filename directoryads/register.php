@@ -25,6 +25,15 @@
     <style>
       .error {color: #FF0000;}
     </style>
+    <style>
+      .submited {color: #0FFF0F;} {size: 40}
+    </style>
+    <style>
+    span.note {
+    font-size: 120%;
+    color: green;
+}
+    </style>
   </head>
   <body>
   
@@ -127,7 +136,7 @@
             $db_connection = pg_connect("host=ec2-174-129-227-80.compute-1.amazonaws.com port=5432 dbname=d81pqnbohorfk0 user=ddsgwogqfbfyyv password=751ab46d5dac57762560abf99367ea2cac7cf7e81ebab8719935e8d7fd244db3");
 
             // Check if name has been entered
-            if(empty($_POST['user']) || (preg_match("/^([a-zA-Z]+\s^[a-zA-Z]+/", $_POST["user"]) === 0)) {
+            if(empty($_POST['user']) || (preg_match("/^[a-z ,.'-]+$/", $_POST["user"]) === 0)){
                 $errName= 'Please enter your first and last name separated by a space. No sepcial characters (!, @, #, etc.) or numbers.';
                 $valid=false;
             }
@@ -145,18 +154,18 @@
             }
             
             // Check if address has been entered and matches correct format
-            if(empty($_POST['address']) || (preg_match("/^\d+\s[A-z]+\s[A-z]+/", $_POST["address"]) === 0) ){
+            if(empty($_POST['address']) || (preg_match("/^\d+\s[A-z]+\s[A-z]+$/", $_POST["address"]) === 0) ){
                 $errAddr= '<p class="errText">Address must contain address number and street name and street type (i.e. dr, blvd, etc.).</p>';
                 $valid=false;
             }
             // Check if name has been entered
-            if(empty($_POST['city']) || (preg_match("/^([a-zA-Z]+\s^[a-zA-Z]+/", $_POST["city"]) === 0)) {
-              $errCity= 'Please enter your city. No sepcial characters (!, @, #, etc.) or numbers.';
+            if(empty($_POST['city']) || (preg_match("/^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/", $_POST["city"]) === 0)) {
+              $errCity= '<p class="errText">Please enter your city. No sepcial characters (!, @, #, etc.) or numbers.</p>';
               $valid=false;
             }
             //check for state input 
             if(empty($_POST['state'])) {
-              $errState= '<p class="errText">Please select a state';
+              $errState= '<p class="errText">Please select a state</p>';
               $valid=false;
             }
             
@@ -172,15 +181,19 @@
                 $errDuplicate = '<p class="errText">Duplicate email address</p>';
                 $valid=false;
             }
-            else{
+            if($valid == true){
                 $query = "INSERT INTO users VALUES ('$name', '$email', '$address', '$city', '$state',  '$zipcode', '$hashed_password')";
                 $result = pg_query($db_connection, $query);
+                if($valid){
+                  echo '<div class="row justify-content-center" style="font-size:1.5em;color:green" >The form has been submitted</div>';
+              }
+            }
+            else{
+              echo '<div class="row justify-content-center" style="font-size:1.25em;color:red" >Please completely fill out the form!</div>';
             }
             
           //message to say that the form has been submitted 
-            if($valid){
-                echo "The form has been submitted";
-            }
+           
 
         }
     ?>
@@ -318,57 +331,57 @@
                         echo $emp;//otherwise have box grey
                       }  ?>" 
                     autofocus> 
-                    <option selected></option>
-                  <option>Alabama</option> <!-- Add the states here -->
-                  <option>Alaska</option>
-                  <option>Arizona</option>
-                  <option>Arkansas</option> 
-                  <option>California</option>
-                  <option>Colorado</option>
-                  <option>Connecticut</option>
-                  <option>Delaware</option>
-                  <option>Florida</option>
-                  <option>Georgia</option> 
-                  <option>Hawaii</option>
-                  <option>Idaho</option>
-                  <option>Illinois</option> 
-                  <option>Indiana</option>
-                  <option>Iowa</option>
-                  <option>Kansas</option>
-                  <option>Kentucky</option>
-                  <option>Louisiana</option>
-                  <option>Maine</option> 
-                  <option>Maryland</option> 
-                  <option>Massaschusetts</option>
-                  <option>Michigan</option>
-                  <option>Minnesota</option> 
-                  <option>Mississippi</option>
-                  <option>Missouri</option>
-                  <option>Montana</option>
-                  <option>Nebraska</option>
-                  <option>Nevada</option>
-                  <option>New Hampshire</option> 
-                  <option>New Jersey</option> 
-                  <option>New Mexico</option>
-                  <option>New York</option>
-                  <option>North Carolina</option> 
-                  <option>North Dakota</option>
-                  <option>Ohio</option>
-                  <option>Oklahoma</option>
-                  <option>Oregon</option>
-                  <option>Pennsylvania</option>
-                  <option>Rhode Island</option> 
-                  <option>South Carolina</option> 
-                  <option>South Dakota</option>
-                  <option>Tennessee</option>
-                  <option>Texas</option> 
-                  <option>Utah</option>
-                  <option>Vermont</option>
-                  <option>Virginia</option>
-                  <option>Washington</option>
-                  <option>West Virginia</option>
-                  <option>Wisconsin</option> 
-                  <option>Wyoming</option>  
+                  <option <?php if ((!isset($state)) || $state=="") echo "selected";?>></option>
+                  <option <?php if ((isset($state)) && $state=="Alabama") echo "selected";?>>Alabama</option> <!-- Add the states here -->
+                  <option <?php if ((isset($state)) && $state=="Alaska") echo "selected";?>>Alaska</option>
+                  <option <?php if ((isset($state)) && $state=="Arizona") echo "selected";?>>Arizona</option>
+                  <option <?php if ((isset($state)) && $state=="Arkansas") echo "selected";?>>Arkansas</option> 
+                  <option <?php if (isset($state) && $state=="California") echo "selected";?>>California</option>
+                  <option <?php if (isset($state) && $state=="Colorado") echo "selected";?>>Colorado</option>
+                  <option <?php if (isset($state) && $state=="Connecticut") echo "selected";?>>Connecticut</option>
+                  <option <?php if (isset($state) && $state=="Delaware") echo "selected";?>>Delaware</option>
+                  <option <?php if (isset($state) && $state=="Florida") echo "selected";?>>Florida</option>
+                  <option <?php if (isset($state) && $state=="Georgia") echo "selected";?>>Georgia</option> 
+                  <option <?php if (isset($state) && $state=="Hawaii") echo "selected";?>>Hawaii</option>
+                  <option <?php if (isset($state) && $state=="Idaho") echo "selected";?>>Idaho</option>
+                  <option <?php if (isset($state) && $state=="Illinois") echo "selected";?>>Illinois</option> 
+                  <option <?php if (isset($state) && $state=="Indiana") echo "selected";?>>Indiana</option>
+                  <option <?php if (isset($state) && $state=="Iowa") echo "selected";?>>Iowa</option>
+                  <option <?php if (isset($state) && $state=="Kansas") echo "selected";?>>Kansas</option>
+                  <option <?php if (isset($state) && $state=="Kentucky") echo "selected";?>>Kentucky</option>
+                  <option <?php if (isset($state) && $state=="Louisiana") echo "selected";?>>Louisiana</option>
+                  <option <?php if (isset($state) && $state=="Maine") echo "selected";?>>Maine</option> 
+                  <option <?php if (isset($state) && $state=="Maryland") echo "selected";?>>Maryland</option> 
+                  <option <?php if (isset($state) && $state=="Massaschusetts") echo "selected";?>>Massaschusetts</option>
+                  <option <?php if (isset($state) && $state=="Michigan") echo "selected";?>>Michigan</option>
+                  <option <?php if (isset($state) && $state=="Minnesota") echo "selected";?>>Minnesota</option> 
+                  <option <?php if (isset($state) && $state=="Mississippi") echo "selected";?>>Mississippi</option>
+                  <option <?php if (isset($state) && $state=="Missouri") echo "selected";?>>Missouri</option>
+                  <option <?php if (isset($state) && $state=="Montana") echo "selected";?>>Montana</option>
+                  <option <?php if (isset($state) && $state=="Nebraska") echo "selected";?>>Nebraska</option>
+                  <option <?php if (isset($state) && $state=="Nevada") echo "selected";?>>Nevada</option>
+                  <option <?php if (isset($state) && $state=="New Hampshire") echo "selected";?>>New Hampshire</option> 
+                  <option <?php if (isset($state) && $state=="New Jersey") echo "selected";?>>New Jersey</option> 
+                  <option <?php if (isset($state) && $state=="New Mexico") echo "selected";?>>New Mexico</option>
+                  <option <?php if (isset($state) && $state=="New York") echo "selected";?>>New York</option>
+                  <option <?php if (isset($state) && $state=="North Carolina") echo "selected";?>>North Carolina</option> 
+                  <option <?php if (isset($state) && $state=="North Dakota") echo "selected";?>>North Dakota</option>
+                  <option <?php if (isset($state) && $state=="Ohio") echo "selected";?>>Ohio</option>
+                  <option <?php if (isset($state) && $state=="Oklahoma") echo "selected";?>>Oklahoma</option>
+                  <option <?php if (isset($state) && $state=="Oregon") echo "selected";?>>Oregon</option>
+                  <option <?php if (isset($state) && $state=="Pennsylvania") echo "selected";?>>Pennsylvania</option>
+                  <option <?php if (isset($state) && $state=="Rhode Island") echo "selected";?>>Rhode Island</option> 
+                  <option <?php if (isset($state) && $state=="South Carolina") echo "selected";?>>South Carolina</option> 
+                  <option <?php if (isset($state) && $state=="South Dakota") echo "selected";?>>South Dakota</option>
+                  <option <?php if (isset($state) && $state=="Tennessee") echo "selected";?>>Tennessee</option>
+                  <option <?php if (isset($state) && $state=="Texas") echo "selected";?>>Texas</option> 
+                  <option <?php if (isset($state) && $state=="Utah") echo "selected";?>>Utah</option>
+                  <option <?php if (isset($state) && $state=="Vermont") echo "selected";?>>Vermont</option>
+                  <option <?php if (isset($state) && $state=="Virginia") echo "selected";?>>Virginia</option>
+                  <option <?php if (isset($state) && $state=="Washington") echo "selected";?>>Washington</option>
+                  <option <?php if (isset($state) && $state=="West Virginia") echo "selected";?>>West Virginia</option>
+                  <option <?php if (isset($state) && $state=="Wisconsin") echo "selected";?>>Wisconsin</option> 
+                  <option <?php if (isset($state) && $state=="Wyoming") echo "selected";?>>Wyoming</option>  
                   <!--My dropdown
                 -
 <!DOCTYPE html>
