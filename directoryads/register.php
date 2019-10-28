@@ -118,7 +118,7 @@
         //Import PHPMailer classes into the global namespace
         use PHPMailer\PHPMailer\PHPMailer;
         use PHPMailer\PHPMailer\SMTP;
-        require '../vendor/autoload.php';
+        require 'vendor/autoload.php';
 
         //vars for changing the form box colors
         $yvalid = "form-control is-valid"; 
@@ -141,7 +141,7 @@
             $db_connection = pg_connect("host=ec2-174-129-227-80.compute-1.amazonaws.com port=5432 dbname=d81pqnbohorfk0 user=ddsgwogqfbfyyv password=751ab46d5dac57762560abf99367ea2cac7cf7e81ebab8719935e8d7fd244db3");
 
             // Check if name has been entered
-            if(empty($_POST['user']) || (preg_match("/^[a-z ,.'-]+$/", $_POST["user"]) === 0)){
+            if(empty($_POST['user']) || (preg_match("/^([a-zA-Z]+|[a-zA-Z]+\s{1}[a-zA-Z]{1,}|[a-zA-Z]+\s{1}[a-zA-Z]{3,}\s{1}[a-zA-Z]{1,})$/", $_POST["user"]) === 0)){
                 $errName= 'Please enter your first and last name separated by a space. No sepcial characters (!, @, #, etc.) or numbers.';
                 $valid=false;
             }
@@ -202,13 +202,16 @@
                 */
                 //Create a new PHPMailer instance
                 $mail = new PHPMailer;
+
+                $body = file_get_contents('email/email.html');
+
                 //Tell PHPMailer to use SMTP
                 $mail->isSMTP();
                 //Enable SMTP debugging
                 // SMTP::DEBUG_OFF = off (for production use)
                 // SMTP::DEBUG_CLIENT = client messages
                 // SMTP::DEBUG_SERVER = client and server messages
-                $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                $mail->SMTPDebug = SMTP::DEBUG_OFF;
                 //Set the hostname of the mail server
                 $mail->Host = 'smtp.gmail.com';
                 // use
@@ -234,15 +237,11 @@
                 $mail->Subject = 'Hello from The Vault';
                 //Read an HTML message body from an external file, convert referenced images to embedded,
                 //convert HTML into a basic plain-text alternative body
-                $mail->msgHTML(file_get_contents('email.html'), __DIR__);
+                $mail->msgHTML($body, 'email');
                 //Replace the plain text body with one created manually
-                $mail->AltBody = 'This is a plain-text message body';
+                $mail->AltBody = 'Welcome to The Vault';
                 //send the message, check for errors
-                if (!$mail->send()) {
-                    echo 'Mailer Error: '. $mail->ErrorInfo;
-                } else {
-                    echo 'Message sent!';
-                }
+                $mail->send();
             }
             else{
               echo '<div class="row justify-content-center" style="font-size:1.25em;color:red" >Please completely fill out the form!</div>';
