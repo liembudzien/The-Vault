@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>The Vault - Contact Us</title>
+    <title>The Vault - Buy Now</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -22,7 +22,8 @@
     <link rel="stylesheet" href="css/rangeslider.css">
 
     <link rel="stylesheet" href="css/style.css">
-    
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </head>
   <body>
   
@@ -91,8 +92,8 @@
             
             <div class="row justify-content-center mt-5">
               <div class="col-md-8 text-center">
-                <h1>Contact Us</h1>
-                <p class="mb-0">Reach out if you have any questions or concerns!</p>
+                <h1>Buy Now!</h1>
+                <p class="mb-0">---</p>
               </div>
             </div>
 
@@ -103,146 +104,78 @@
     </div>  
 
 
-    <div class="site-section bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-7 mb-5"  data-aos="fade">
+    <div class="site-section ">
 
-            
-
-            <form action="#" class="p-5 bg-white">
-             
-
-              <div class="row form-group">
-                <div class="col-md-6 mb-3 mb-md-0">
-                  <label class="text-black" for="fname">First Name</label>
-                  <input type="text" id="fname" class="form-control">
-                </div>
-                <div class="col-md-6">
-                  <label class="text-black" for="lname">Last Name</label>
-                  <input type="text" id="lname" class="form-control">
-                </div>
-              </div>
-
-              <div class="row form-group">
-                
-                <div class="col-md-12">
-                  <label class="text-black" for="email">Email</label> 
-                  <input type="email" id="email" class="form-control">
-                </div>
-              </div>
-
-              <div class="row form-group">
-                
-                <div class="col-md-12">
-                  <label class="text-black" for="subject">Subject</label> 
-                  <input type="subject" id="subject" class="form-control">
-                </div>
-              </div>
-
-              <div class="row form-group">
-                <div class="col-md-12">
-                  <label class="text-black" for="message">Message</label> 
-                  <textarea name="message" id="message" cols="30" rows="7" class="form-control" placeholder="Write your notes or questions here..."></textarea>
-                </div>
-              </div>
-
-              <div class="row form-group">
-                <div class="col-md-12">
-                  <input type="submit" value="Send Message" class="btn btn-primary py-2 px-4 text-white">
-                </div>
-              </div>
+    <div class="container">
+<div class="row">
+  <div class="col-md-4 mb-lg-5">
+	<figure class="card card-product">
+		<div class="img-wrap"><img src="images/1-month.png" alt="Image" class="img-fluid mb-1"></div>
+		<figcaption class="info-wrap">
+				<h4 class="title"> 1 Month All Access</h4>
+				<p class="desc">Get 1 month of access to all games</p>
+    </figcaption>
+    	<div class="price-wrap h5">
+				<span class="price-new"> $15.99</span> <del class="price-old"> $19.99</del>
+			</div> <!-- price-wrap.// -->
+		<div class="bottom-wrap">
+			
+    <form action="https://test.bitpay.com/checkout" method="post" >
+  <input type="hidden" name="action" value="cartAdd" />
+  <input type="hidden" name="data" value="XsiEHcigLBZhUFu89hQ2uS" />
+  <input type="image" src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg" name="submit" style="width: 168px;" alt="BitPay, the easy way to pay with bitcoins." >
+</form>
+		
+		</div> <!-- bottom-wrap.// -->
+	</figure>
+</div> <!-- col // -->
+<div class="col-md-4 mb-lg-5">
+	<figure class="card card-product">
+		<div class="img-wrap"><img src="images/6-months.png" alt="Image" class="img-fluid mb-1"></div>
+		<figcaption class="info-wrap">
+				<h4 class="title"> 6 Month All Access</h4>
+				<p class="desc">Get 6 months of access to all games</p>
+    </figcaption>
+    	<div class="price-wrap h5">
+				<span class="price-new"> $77.99</span> <del class="price-old"> $95.99</del> <mark class="bg-info"> Save 20%</mark>  
+			</div> <!-- price-wrap.// -->
+		<div class="bottom-wrap">
+			
+    <form action="https://test.bitpay.com/checkout" method="post" >
+  <input type="hidden" name="action" value="cartAdd" />
+  <input type="hidden" name="data" value="9B4Ab9mfkciVKjs6ffpzoS" />
+  <input type="image" src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg" name="submit" style="width: 168px;" alt="BitPay, the easy way to pay with bitcoins." >
+</form>
+		
+		</div> <!-- bottom-wrap.// -->
+  </figure>
+    </div>
+  <div class="col-md-4 mb-lg-5">
+	<figure class="card card-product">
+		<div class="img-wrap"><img src="images/1-year.png" alt="Image" class="img-fluid mb-1"></div>
+		<figcaption class="info-wrap">
+				<h4 class="title"> 1 Year All Access</h4>
+				<p class="desc">Get 1 Year of access to all games</p>
+    </figcaption>
+    	<div class="price-wrap h5">
+				<span class="price-new"> $107.99</span> <del class="price-old"> $191.99</del> <mark class="bg-info"> Save 45%</mark>  
+			</div> <!-- price-wrap.// -->
+		<div class="bottom-wrap">
+			
+    <form action="https://test.bitpay.com/checkout" method="post" >
+  <input type="hidden" name="action" value="cartAdd" />
+  <input type="hidden" name="data" value="5gbsrAr6gff5Hp3iZuYvE1" />
+  <input type="image" src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg" name="submit" style="width: 168px;" alt="BitPay, the easy way to pay with bitcoins." >
+</form>
+		
+		</div> <!-- bottom-wrap.// -->
+	</figure>
+</div> <!-- col // -->
+</div> <!-- row.// -->
+</div>
+</div> 
 
   
-            </form>
-          </div>
-          <div class="col-md-5"  data-aos="fade" data-aos-delay="100">
-            
-            <div class="p-4 mb-3 bg-white">
-              <p class="mb-0 font-weight-bold">Address</p>
-              <p class="mb-4">1826 University Ave Charlottesville, Virginia, 22904, USA</p>
-
-              <p class="mb-0 font-weight-bold">Phone</p>
-              <p class="mb-4"><a href="#">+1 232 3235 324</a></p>
-
-              <p class="mb-0 font-weight-bold">Email Address</p>
-              <p class="mb-0"><a href="#">customerservice@thevault.com</a></p>
-
-            </div>
-            
-            <div class="p-4 mb-3 bg-white">
-              <h3 class="h5 text-black mb-3">More Info</h3>
-              <p>Does you message not fit within an email? We have customer service representatives ready to assist you with any questions or concerns about our product.
-                Drop us a call during any business hours and we're happy to take your call!</p>
-              <p><a href="#" class="btn btn-primary px-4 py-2 text-white">Learn More</a></p>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="site-section">
-      <div class="container">
-        <div class="row justify-content-center mb-5">
-          <div class="col-md-7 text-center border-primary">
-            <h2 class="font-weight-light text-primary">Frequently Asked Questions</h2>
-            <p class="color-black-opacity-5">See below for commonly asked questions, answered.</p>
-          </div>
-        </div>
-
-
-        <div class="row justify-content-center">
-          <div class="col-8">
-            <div class="border p-3 rounded mb-2">
-              <a data-toggle="collapse" href="#collapse-1" role="button" aria-expanded="false" aria-controls="collapse-1" class="accordion-item h5 d-block mb-0">How much does The Vault cost?</a>
-
-              <div class="collapse" id="collapse-1">
-                <div class="pt-2">
-                  <p class="mb-0">The price depends on the subscription plan. Monthly all access plans cost $15.99 a month, while Annual plans are $9.99 a month (annualized). Outside of
-                    the monthly and annual plans, we also offer individual games on a subscription basis, for $3.99 a month.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="border p-3 rounded mb-2">
-              <a data-toggle="collapse" href="#collapse-4" role="button" aria-expanded="false" aria-controls="collapse-4" class="accordion-item h5 d-block mb-0">Is this available in my country?</a>
-
-              <div class="collapse" id="collapse-4">
-                <div class="pt-2">
-                  <p class="mb-0">Right now, we currently offer our product to consumers in the United States, Canada, and the United Kingdom. Stay tuned for future expansion of
-                    availability!</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="border p-3 rounded mb-2">
-              <a data-toggle="collapse" href="#collapse-2" role="button" aria-expanded="false" aria-controls="collapse-2" class="accordion-item h5 d-block mb-0">My games aren't loading.</a>
-
-              <div class="collapse" id="collapse-2">
-                <div class="pt-2">
-                  <p class="mb-0">Be sure to double check your internet connection before playing any games. We use an online system to ensure the integrity of the
-                    subscription pass and to optimize multiplayer environments. We recommend at least 25 mbps download and 10 mbps upload for smooth operation.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="border p-3 rounded mb-2">
-              <a data-toggle="collapse" href="#collapse-3" role="button" aria-expanded="false" aria-controls="collapse-3" class="accordion-item h5 d-block mb-0">What if I have multiple computers?</a>
-
-              <div class="collapse" id="collapse-3">
-                <div class="pt-2">
-                  <p class="mb-0">You can use our product on as many computers as you like! Simply log in and enjoy access to all of your games, instantly. However, there
-                    is a limit on active sessions. You may only actively play one game at a time on your account.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-        </div>
-        
-      </div>
-    </div>
 
 
     <div class="newsletter bg-primary py-5">
