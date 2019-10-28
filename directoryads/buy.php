@@ -62,7 +62,7 @@
                   </ul> -->
                 </li>
                 <!-- <li><a href="blog.html">Blog</a></li> -->
-                <li><a href="Buy.php">Subscribe</a></li>
+                <li><a href="buy.php">Subscribe</a></li>
                 <li class="mr-5"><a href="contact.html">Contact Us</a></li>
 
                 <li class="ml-xl-3 login"><a href="login.php"><span class="border-left pl-xl-4"></span>Log In</a></li>
