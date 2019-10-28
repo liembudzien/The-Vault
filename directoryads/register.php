@@ -211,7 +211,7 @@
                 // SMTP::DEBUG_OFF = off (for production use)
                 // SMTP::DEBUG_CLIENT = client messages
                 // SMTP::DEBUG_SERVER = client and server messages
-                $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                $mail->SMTPDebug = SMTP::DEBUG_OFF;
                 //Set the hostname of the mail server
                 $mail->Host = 'smtp.gmail.com';
                 // use
@@ -241,11 +241,7 @@
                 //Replace the plain text body with one created manually
                 $mail->AltBody = 'Welcome to The Vault';
                 //send the message, check for errors
-                if (!$mail->send()) {
-                    echo 'Mailer Error: '. $mail->ErrorInfo;
-                } else {
-                    echo 'Message sent!';
-                }
+                $mail->send();
             }
             else{
               echo '<div class="row justify-content-center" style="font-size:1.25em;color:red" >Please completely fill out the form!</div>';
