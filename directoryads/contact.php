@@ -167,12 +167,9 @@
                 $mail->Host = 'smtp.gmail.com';
                 $mail->Port = 587;
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                $mail->Host = 'smtp.hotmail.com';
-                $mail->Port = 664;
-                $mail ->SMTPSecure = PHPMailer:: ENCRYPTION_STARTTLS; 
                 $mail->SMTPAuth = true;
                 $mail->Username = 'thevaultp@gmail.com';
-                $mail->Password = 'Vault110!';
+                $mail->Password = 'Vault100!';
                 $mail->setFrom('customerservice@thevault.com', $name);
                 $mail->addReplyTo($email, $first);
                 $mail->addAddress('thevaultp@gmail.com', 'Contact Form');
