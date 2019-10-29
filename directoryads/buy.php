@@ -125,13 +125,6 @@
   <input type="hidden" name="data" value="XsiEHcigLBZhUFu89hQ2uS" />
   <input type="image" src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg" name="submit" style="width: 168px;" alt="BitPay, the easy way to pay with bitcoins." >
 </form>
-<!-- version without cart
-  <form action="https://test.bitpay.com/checkout" method="post">
-  <input type="hidden" name="action" value="checkout" />
-  <input type="hidden" name="posData" value="" />
-  <input type="hidden" name="data" value="1V6cI4jjXQsPmUC8ZluSINCuL4tzpKmObV8X3rABDcn/wi3/Z3mqRscGybUyabqdvHrhmt0PhR69hiXSB24T9cTAb5HNYsP6D/NZMSS4e0hqwjjD9/6QBANj9APxPcnaDJyP+268UQ4lEkqQD7EHX+z9wysfH3wkfl04eAWAv/6np73VFgvMD+axg/HSxju9OwrohFiSRmvK5z2EPZBhIXxxpVjouwJHi0K5BAzWQ3OX5dPSVAP6C1msVJhCAf+M" />
-  <input type="image" src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg" name="submit" style="width: 168px" alt="BitPay, the easy way to pay with bitcoins.">
-</form>-->
 		
 		</div> <!-- bottom-wrap.// -->
 	</figure>
@@ -153,13 +146,7 @@
   <input type="hidden" name="data" value="9B4Ab9mfkciVKjs6ffpzoS" />
   <input type="image" src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg" name="submit" style="width: 168px;" alt="BitPay, the easy way to pay with bitcoins." >
 </form>
-		<!-- other button version 
-      <form action="https://test.bitpay.com/checkout" method="post">
-  <input type="hidden" name="action" value="checkout" />
-  <input type="hidden" name="posData" value="" />
-  <input type="hidden" name="data" value="1V6cI4jjXQsPmUC8ZluSINCuL4tzpKmObV8X3rABDcn/wi3/Z3mqRscGybUyabqdqvdQq1UDh2mqHv+BQRyaFkOhfNeW0GsJf4OK+I5tUYg12SZuBrNihMY6pETbaYCrNDpY+nwDaaiHRxNxF1SBT7kczduhW0/23692pr2Kpe0A1hVOrkQvN3reN8dCDOqg+AjJ8xBFoCcwJUtH/UeENaPu3WIcmscm+zuXf6AEySTJ6AQnvGh8N1V7ynXP8h7O" />
-  <input type="image" src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg" name="submit" style="width: 168px" alt="BitPay, the easy way to pay with bitcoins.">
-</form>-->
+		
 		</div> <!-- bottom-wrap.// -->
   </figure>
     </div>
@@ -180,13 +167,7 @@
   <input type="hidden" name="data" value="5gbsrAr6gff5Hp3iZuYvE1" />
   <input type="image" src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg" name="submit" style="width: 168px;" alt="BitPay, the easy way to pay with bitcoins." >
 </form>
-		<!-- other button version 
-      <form action="https://test.bitpay.com/checkout" method="post">
-  <input type="hidden" name="action" value="checkout" />
-  <input type="hidden" name="posData" value="" />
-  <input type="hidden" name="data" value="1V6cI4jjXQsPmUC8ZluSINCuL4tzpKmObV8X3rABDcn/wi3/Z3mqRscGybUyabqdRe4RcRoBMoU/CQ1yCyKl09ASnW/8Y3RT6BGm7vid13INYL9i2bKlh4ZbwZaZxSEfXmM8rBH+4kBIJbvVLgJikOJfMJy0tr5vY+NwO+cMCn3RfLFs/4mPll8x7SSsO9Nh7U3i+XGFpIfEppBCn3EGKq2rDkg9DF5QqkqlhLGELm44oEsgPSYJMMqHp+H8KA7g" />
-  <input type="image" src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg" name="submit" style="width: 168px" alt="BitPay, the easy way to pay with bitcoins.">
-</form>-->
+		
 		</div> <!-- bottom-wrap.// -->
 	</figure>
 </div> <!-- col // -->
