@@ -127,14 +127,14 @@
             $message = $_POST['message'];
 
             // Check if first name has been entered
-            if(empty($_POST['first']) || (preg_match("/^([a-zA-Z]+|[a-zA-Z]+\s{1}[a-zA-Z]{1,}|[a-zA-Z]+\s{1}[a-zA-Z]{3,}\s{1}[a-zA-Z]{1,})$/", $_POST["user"]) === 0)){
-                $errName= 'Please enter your first name. No sepcial characters (!, @, #, etc.) or numbers.';
+            if(empty($_POST['first'])){
+                $errFirst= 'Please enter your first name.';
                 $valid=false;
             }
 
             // Check if last name has been entered
-            if(empty($_POST['last']) || (preg_match("/^([a-zA-Z]+|[a-zA-Z]+\s{1}[a-zA-Z]{1,}|[a-zA-Z]+\s{1}[a-zA-Z]{3,}\s{1}[a-zA-Z]{1,})$/", $_POST["user"]) === 0)){
-                $errName= 'Please enter your last name. No sepcial characters (!, @, #, etc.) or numbers.';
+            if(empty($_POST['last'])){
+                $errLast= 'Please enter your last name.';
                 $valid=false;
             }
             
@@ -144,80 +144,39 @@
                 $valid=false;
             }
             
-            // Check if address has been entered and matches correct format
-            if(empty($_POST['address']) || (preg_match("/^\d+\s[A-z]+\s[A-z]+$/", $_POST["address"]) === 0) ){
-                $errAddr= '<p class="errText">Address must contain address number and street name and street type (i.e. dr, blvd, etc.).</p>';
-                $valid=false;
-            }
-            // Check if name has been entered
-            if(empty($_POST['city']) || (preg_match("/^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/", $_POST["city"]) === 0)) {
-              $errCity= '<p class="errText">Please enter your city. No sepcial characters (!, @, #, etc.) or numbers.</p>';
+            //check for subject input 
+            if(empty($_POST['subject'])) {
+              $errSubject= '<p class="errText">Please provide a subject</p>';
               $valid=false;
             }
+
             //check for state input 
-            if(empty($_POST['state'])) {
-              $errState= '<p class="errText">Please select a state</p>';
+            if(empty($_POST['message'])) {
+              $errMessage= '<p class="errText">You cannot leave the message blank!</p>';
               $valid=false;
             }
-            
-            // Check if zipcode has been entered in the correct format
-            if(empty($_POST['zipcode']) || (preg_match("/^\d{5}$/", $_POST["zipcode"]) === 0) ){
-                $errZipcode= '<p class="errText">Zipcode must be 5 numbers</p>';
-                $valid=false;
-            }
-            
 
             if($valid){
                 if($valid){
                   echo '<div class="row justify-content-center" style="font-size:1.5em;color:green" >The form has been submitted</div>';
                 }
                
-                /**
-                * This example shows settings to use when sending via Google's Gmail servers.
-                * This uses traditional id & password authentication - look at the gmail_xoauth.phps
-                * example to see how to use XOAUTH2.
-                * The IMAP section shows how to save this message to the 'Sent Mail' folder using IMAP commands.
-                */
-                //Create a new PHPMailer instance
                 $mail = new PHPMailer;
-
-                $body = file_get_contents('email/email.html');
-
-                //Tell PHPMailer to use SMTP
                 $mail->isSMTP();
-                //Enable SMTP debugging
-                // SMTP::DEBUG_OFF = off (for production use)
-                // SMTP::DEBUG_CLIENT = client messages
-                // SMTP::DEBUG_SERVER = client and server messages
                 $mail->SMTPDebug = SMTP::DEBUG_OFF;
-                //Set the hostname of the mail server
                 $mail->Host = 'smtp.gmail.com';
-                // use
-                // $mail->Host = gethostbyname('smtp.gmail.com');
-                // if your network does not support SMTP over IPv6
-                //Set the SMTP port number - 587 for authenticated TLS, a.k.a. RFC4409 SMTP submission
                 $mail->Port = 587;
-                //Set the encryption mechanism to use - STARTTLS or SMTPS
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                //Whether to use SMTP authentication
                 $mail->SMTPAuth = true;
-                //Username to use for SMTP authentication - use full email address for gmail
                 $mail->Username = 'thevaultp@gmail.com';
-                //Password to use for SMTP authentication
                 $mail->Password = 'Vault100!';
-                //Set who the message is to be sent from
                 $mail->setFrom('customerservice@thevault.com', 'The Vault');
-                //Set an alternative reply-to address
-                $mail->addReplyTo('thevaultp@gmail.com', 'The Vault');
-                //Set who the message is to be sent to
-                $mail->addAddress($email, $name);
-                //Set the subject line
-                $mail->Subject = 'Hello from The Vault';
-                //Read an HTML message body from an external file, convert referenced images to embedded,
-                //convert HTML into a basic plain-text alternative body
-                $mail->msgHTML($body, 'email');
+                $mail->addReplyTo($email, $first);
+                $mail->addAddress('thevaultp@gmail.com', 'Contact Form');
+                $mail->Subject = $subject;
+                $mail->Body = $message;
                 //Replace the plain text body with one created manually
-                $mail->AltBody = 'Welcome to The Vault';
+                $mail->AltBody = 'Message from Contact Form';
                 //send the message, check for errors
                 $mail->send();
             }
@@ -235,46 +194,105 @@
 
             
 
-            <form action="#" class="p-5 bg-white">
+            <form role="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" class="p-5 bg-white">
              
 
               <div class="row form-group">
                 <div class="col-md-6 mb-3 mb-md-0">
-                  <label class="text-black" for="fname">First Name</label>
-                  <input type="text" id="fname" class="form-control">
+                  <label class="text-black" for="inputFirst">First Name</label>
+                  <input type="text" id="inputFirst" name="first" placeholder="First Name" class=" <?php
+                    if($errFirst == "" && ($first != "")){
+                      echo $yvalid;
+                    }
+                    else if($errFirst != ""){
+                      echo $invalid;
+                    }
+                    else{
+                      echo $emp;
+                    } ?>"
+
+                    value="<?php echo $first; ?>" autofocus>
+                    <span class="error"> <?php echo $errFirst; ?> </span>
                 </div>
                 <div class="col-md-6">
-                  <label class="text-black" for="lname">Last Name</label>
-                  <input type="text" id="lname" class="form-control">
-                </div>
-              </div>
+                  <label class="text-black" for="inputLast">Last Name</label>
+                  <input type="text" id="inputLast" name="last" placeholder="Last Name" class=" <?php
+                    if($errLast == "" && ($last != "")){
+                      echo $yvalid;
+                    }
+                    else if($errLast != ""){
+                      echo $invalid;
+                    }
+                    else{
+                      echo $emp;
+                    } ?>"
 
-              <div class="row form-group">
-                
-                <div class="col-md-12">
-                  <label class="text-black" for="email">Email</label> 
-                  <input type="email" id="email" class="form-control">
-                </div>
-              </div>
-
-              <div class="row form-group">
-                
-                <div class="col-md-12">
-                  <label class="text-black" for="subject">Subject</label> 
-                  <input type="subject" id="subject" class="form-control">
-                </div>
-              </div>
-
-              <div class="row form-group">
-                <div class="col-md-12">
-                  <label class="text-black" for="message">Message</label> 
-                  <textarea name="message" id="message" cols="30" rows="7" class="form-control" placeholder="Write your notes or questions here..."></textarea>
+                    value="<?php echo $last; ?>" autofocus>
+                    <span class="error"> <?php echo $errLast; ?> </span>
                 </div>
               </div>
 
               <div class="row form-group">
                 <div class="col-md-12">
-                  <input type="submit" value="Send Message" class="btn btn-primary py-2 px-4 text-white">
+                  <label class="text-black" for="inputEmail">Email</label> 
+                  <input type="email" id="inputEmail" name="email" placeholder="Your Email" class=" <?php
+                    if($errEmail == "" && ($email != "")){
+                      echo $yvalid;
+                    }
+                    else if($errEmail != ""){
+                      echo $invalid;
+                    }
+                    else{
+                      echo $emp;
+                    } ?>"
+
+                    value="<?php echo $email; ?>" autofocus>
+                    <span class="error"> <?php echo $errEmail; ?> </span>
+                </div>
+              </div>
+
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <label class="text-black" for="inputSubject">Subject</label> 
+                  <input type="subject" id="inputSubject" name="subject" placeholder="Subject" class=" <?php
+                    if($errSubject == "" && ($subject != "")){
+                      echo $yvalid;
+                    }
+                    else if($errSubject != ""){
+                      echo $invalid;
+                    }
+                    else{
+                      echo $emp;
+                    } ?>"
+
+                    value="<?php echo $subject; ?>" autofocus>
+                    <span class="error"> <?php echo $errSubject; ?> </span>
+                </div>
+              </div>
+
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <label class="text-black" for="inputMessage">Message</label> 
+                  <textarea type="message" name="message" id="inputMessage" cols="30" rows="7" placeholder="Write your notes or questions here..." class=" <?php
+                    if($errMessage == "" && ($message != "")){
+                      echo $yvalid;
+                    }
+                    else if($errMessage != ""){
+                      echo $invalid;
+                    }
+                    else{
+                      echo $emp;
+                    } ?>"
+
+                    value="<?php echo $message; ?>" autofocus>
+                    
+                  </textarea>
+                </div>
+              </div>
+
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <input type="submit" name="submit" value="Send Message" class="btn btn-primary py-2 px-4 text-white">
                 </div>
               </div>
 
