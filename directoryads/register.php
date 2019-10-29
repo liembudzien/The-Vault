@@ -332,18 +332,19 @@
                 
             <!-- Address box -->
             <div class="form-group row">
-            <div class="form-group row">
-                <label for="inputCity" class="col-sm-2 col-form-label">City</label>
+                <label for="inputAddress" class="col-sm-2 col-form-label">Address</label>
                 <div class="col-sm-10">
-                    <input type="text"  id="inputCity" name="city" placeholder="City" class="<?php 
-                      if($errCity == "" && ($city != "")){ //if there is no error set and a name has been entered
+                    <input type="address" id="inputAddress" name="address" placeholder="Address" 
+                    title="must have a street address with number and street name" value="<?php echo $address; ?>" class="<?php 
+                      if($errAddr == "" && ($address != "")){ //if there is no error set and an address has been entered
                         echo $yvalid; //change box to green
                       }
-                      else if($errCity != ""){ //if there is an error message outprinted 
+                      else if($errAddr != ""){ //if there is an error message outprinted 
                         echo $invalid; //change box to red
-                      }
+                      }                                                                                                      
                       else{
                         echo $emp;//otherwise have box grey
+                      }  ?>" 
                     autofocus> 
                     <span class="error"> <?php echo $errAddr; ?> </span> 
                 </div>
