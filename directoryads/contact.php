@@ -160,7 +160,7 @@
                 if($valid){
                   echo '<div class="row justify-content-center" style="font-size:1.5em;color:green" >The form has been submitted</div>';
                 }
-               
+                $name = $first . ' ' . $last;
                 $mail = new PHPMailer;
                 $mail->isSMTP();
                 $mail->SMTPDebug = SMTP::DEBUG_OFF;
@@ -170,7 +170,7 @@
                 $mail->SMTPAuth = true;
                 $mail->Username = 'thevaultp@gmail.com';
                 $mail->Password = 'Vault100!';
-                $mail->setFrom('customerservice@thevault.com', 'The Vault');
+                $mail->setFrom('customerservice@thevault.com', $name);
                 $mail->addReplyTo($email, $first);
                 $mail->addAddress('thevaultp@gmail.com', 'Contact Form');
                 $mail->Subject = $subject;
