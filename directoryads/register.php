@@ -183,7 +183,7 @@
             $test = pg_query($db_connection, "SELECT * from users where email='$email'");
             $num_rows = pg_affected_rows($test);
             if($num_rows > 0){
-                $errDuplicate = '<p class="errText">Duplicate email address</p>';
+                $errDuplicate = '<p class="errText">Duplicate email addressees</p>';
                 $valid=false;
             }
 
@@ -191,7 +191,7 @@
                 $query = "INSERT INTO users VALUES ('$name', '$email', '$address', '$city', '$state',  '$zipcode', '$hashed_password')";
                 $result = pg_query($db_connection, $query);
                 if($valid){
-                  echo '<div class="row justify-content-center" style="font-size:1.5em;color:green" >The form has been submitted</div>';
+                  echo '<div class="row justify-content-center" style="font-size:2.7em;color:green" >The form has been submitted</div>';
                 }
                
                 /**
