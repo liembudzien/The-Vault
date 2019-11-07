@@ -62,6 +62,7 @@
                 </li>
                 <!-- <li><a href="blog.html">Blog</a></li> -->
                 <li><a href="buy.php">Subscribe</a></li>
+                
                 <li class="mr-5"><a href="contact.php">Contact Us</a></li>
 
                 <li class="ml-xl-3 login"><a href="login.php"><span class="border-left pl-xl-4"></span>Log In</a></li>
@@ -112,15 +113,17 @@
         
         if(isset($_POST["submit"])) {
             $email = $_POST['email'];
-            $name = $_POST['user'];
+            //$name = $_POST['user'];
             $password = $_POST['password'];
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
             $valid=true;
+            $db_connection = pg_connect("host=ec2-174-129-227-80.compute-1.amazonaws.com port=5432 dbname=d81pqnbohorfk0 user=ddsgwogqfbfyyv password=751ab46d5dac57762560abf99367ea2cac7cf7e81ebab8719935e8d7fd244db3");
 
             // Check if name has been entered
-            if(empty($_POST['user'])){
+           /*  if(empty($_POST['user'])){
                 $errName= 'Please enter your user name';
                 $valid=false;
-            }
+            } */
             // Check if email has been entered and is valid
             if(empty($_POST['email'])){
                 $errEmail = 'Please enter a valid email address';
@@ -130,9 +133,16 @@
             if(empty($_POST['password']) || (preg_match("/^.*(?=.{8,})(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).*$/", $_POST["password"]) === 0)) {
                 $errPass = '<p class="errText">Password must be at least 8 characters and must contain at least one lower case letter, one upper case letter and one digit</p>';
                 $valid=false;
-            }
+            } 
+            /* $test = pg_query($db_connection, "SELECT * from users where email='$email'");
+            $num_rows = pg_affected_rows($test);
+            if($num_rows > 0){
+                $errDuplicate = '<p class="errText">Duplicate email address</p>';
+                $valid=false;
+            } */
             if($valid){
-                echo "The form has been submitted";
+                echo '<div class="row justify-content-center" style="font-size:1.5em;color:green" >The form has been submitted</div>';
+                header("Location: memberhome.php") ; // redirects to page named (i.e. listings.php) 
             }
 
         }
@@ -156,11 +166,11 @@
                 </div>
             </div>
             
-            <div class="form-group row">
+            <!-- <div class="form-group row">
                 <label for="inputUser" class="col-sm-2 col-form-label">Username</label>
                 <div class="col-sm-10">
                     <input type="text"  id="inputUser" name="user" placeholder="Username"  class="<?php 
-                      if($errName == "" && ($name != "")){
+                      /* if($errName == "" && ($name != "")){
                         echo $yvalid;
                       }
                       else if($errName != ""){
@@ -168,11 +178,11 @@
                       }
                       else{
                         echo $emp;
-                      } ?>" 
-                    value="<?php echo $name; ?>">
-                    <?php echo $errName; ?>
+                      } */ ?>" 
+                    value="<?php //echo $name; ?>">
+                    <?php //echo $errName; ?>
                 </div>
-            </div>
+            </div> -->
 
             <div class="form-group row">
                 <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
