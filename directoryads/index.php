@@ -94,7 +94,7 @@
             
             <div class="row justify-content-center mb-4">
               <div class="col-md-8 text-center">
-                <h1 class="" data-aos="fade-up">Welcome To The Vault</h1>
+                <h1 class="" data-aos="fade-up">Welcome To Vault</h1>
                 <p data-aos="fade-up" data-aos-delay="100"> </p>
               </div>
             </div>
