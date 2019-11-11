@@ -5,7 +5,7 @@ if (!(isset($_SESSION["login"]))){
   $_SESSION["login"] = "no";
 }
 if ($_SESSION["login"] != "yes"){ // if not logged in, redirect
-  header("Location: index.php");
+  header("Location: login.php");
 }
 
 ?>

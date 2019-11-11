@@ -4,6 +4,9 @@ session_start();
 if (!(isset($_SESSION["login"]))){
   $_SESSION["login"] = "no";
 }
+if ($_SESSION["login"] != "yes"){ // if not logged in, redirect
+  header("Location: login.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
