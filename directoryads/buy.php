@@ -62,6 +62,7 @@ if (!(isset($_SESSION["login"]))){
                 <?php 
                   if ($_SESSION["login"] === "yes"){ //if you are logged in - show member home page
                     ?>
+                    <li><a href="buy.php">Subscribe</a></li>
                     <li><a href="memberhome.php">Member Home</a></li>
                 <?php
                   }
@@ -73,7 +74,7 @@ if (!(isset($_SESSION["login"]))){
                     <li><a href="#">Careers</a></li>
                   </ul> -->
                 <!-- <li><a href="blog.html">Blog</a></li> -->
-                <li><a href="buy.php">Subscribe</a></li>
+                
                 <li class="mr-5"><a href="contact.php">Contact Us</a></li>
                 <?php 
                   if ($_SESSION["login"] === "yes"){ //if you are logged in - show logout page 

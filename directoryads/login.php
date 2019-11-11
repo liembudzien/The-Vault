@@ -65,7 +65,7 @@ session_start();
                   </ul> -->
                 </li>
                 <!-- <li><a href="blog.html">Blog</a></li> -->
-                <li><a href="buy.php">Subscribe</a></li>
+                
                 
                 <li class="mr-5"><a href="contact.php">Contact Us</a></li>
 

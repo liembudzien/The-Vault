@@ -72,13 +72,14 @@ if ($_SESSION["login"] != "yes"){ // if not logged in, redirect
                   </ul> -->
                 </li>
                 <!-- <li><a href="blog.html">Blog</a></li> -->
-                <li><a href="buy.php">Subscribe</a></li>
-                <li class="mr-5"><a href="contact.php">Contact Us</a></li> 
+                
                 <!-- <li class="ml-xl-3 login"><a href="contact.php"><span class="border-left pl-xl-4"></span>Contact Us</a></li> -->
                 <!-- <li class="mr-5"><a href="logout.php" >Logout</a></li> -->
                 <?php 
                   if ($_SESSION["login"] === "yes"){ //if you are logged in - show logout page 
                     ?>
+                    <li><a href="buy.php">Subscribe</a></li>
+                <li class="mr-5"><a href="contact.php">Contact Us</a></li> 
                     <li class="ml-xl-3 login"><a href="login.php"><span class="border-left pl-xl-4"></span></a></li>
                     <li><a href="logout.php" class="cta"><span class="bg-primary text-white rounded ">Logout</span></a></li>
                 <?php
@@ -87,6 +88,7 @@ if ($_SESSION["login"] != "yes"){ // if not logged in, redirect
                 <?php 
                   if ($_SESSION["login"] != "yes"){ //This should be impossible 
                     ?>
+                    <li class="mr-5"><a href="contact.php">Contact Us</a></li> 
                     <li class="ml-xl-3 login"><a href="login.php"><span class="border-left pl-xl-4"></span></a></li>
                     <li><a href="logout.php" class="cta"><span class="bg-primary text-white rounded ">Logout</span></a></li>
                 <?php

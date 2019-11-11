@@ -72,11 +72,12 @@ if (!(isset($_SESSION["login"]))){
                     <li><a href="#">Careers</a></li>
                   </ul> -->
                 <!-- <li><a href="blog.html">Blog</a></li> -->
-                <li><a href="buy.php">Subscribe</a></li>
-                <li class="mr-5"><a href="contact.php">Contact Us</a></li>
+               
                 <?php 
                   if ($_SESSION["login"] === "yes"){ //if you are logged in - show logout page 
                     ?>
+                     <li><a href="buy.php">Subscribe</a></li>
+                <li class="mr-5"><a href="contact.php">Contact Us</a></li>
                     <li class="ml-xl-3 login"><a href="login.php"><span class="border-left pl-xl-4"></span></a></li>
                     <li><a href="logout.php" class="cta"><span class="bg-primary text-white rounded ">Logout</span></a></li>
                 <?php
@@ -85,6 +86,8 @@ if (!(isset($_SESSION["login"]))){
                   <?php 
                   if ($_SESSION["login"] != "yes"){ // if not logged in show the login and register pages
                     ?>
+                    
+                <li class="mr-5"><a href="contact.php">Contact Us</a></li>
                     <li class="ml-xl-3 login"><a href="login.php"><span class="border-left pl-xl-4"></span>Log In</a></li>
                     <li><a href="register.php" class="cta"><span class="bg-primary text-white rounded">Register</span></a></li>
                 <?php
