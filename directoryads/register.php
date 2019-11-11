@@ -1,3 +1,7 @@
+<?php
+// Start the session
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -90,31 +94,8 @@
       <!-- </div> -->
       
     </header>
-
-  
-    <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url(images/dark-background.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
-      <div class="container">
-        <div class="row align-items-center justify-content-center text-center">
-
-          <div class="col-md-10" data-aos="fade-up" data-aos-delay="400">
-            
-            
-            <div class="row justify-content-center mt-5">
-              <div class="col-md-8 text-center">
-                <h1>Sign Up</h1>
-                <!-- <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit</p> -->
-              </div>
-            </div>
-
-            
-          </div>
-        </div>
-      </div>
-    </div>  
-
-    <!-- <div class="container"> -->
       <!-- php code for submitting -->
-    <?php
+      <?php
         //Import PHPMailer classes into the global namespace
         use PHPMailer\PHPMailer\PHPMailer;
         use PHPMailer\PHPMailer\SMTP;
@@ -191,7 +172,11 @@
                 $query = "INSERT INTO users VALUES ('$name', '$email', '$address', '$city', '$state',  '$zipcode', '$hashed_password')";
                 $result = pg_query($db_connection, $query);
                 if($valid){
-                  echo '<div class="row justify-content-center" style="font-size:1.5em;color:green" >The form has been submitted</div>';
+                  //echo '<div class="row justify-content-center" style="font-size:1.5em;color:green" >The form has been submitted</div>';
+                   //php session redirect 
+                $_SESSION["login"] = "yes";
+                // echo '<div class="row justify-content-center" style="font-size:1.5em;color:green" >The form has been submitted</div>';
+                 header("Location: memberhome.php") ; // redirects to page named (i.e. listings.php) 
                 }
                
                 /**
@@ -242,6 +227,8 @@
                 $mail->AltBody = 'Welcome to The Vault';
                 //send the message, check for errors
                 $mail->send();
+
+               
             }
             else{
               echo '<div class="row justify-content-center" style="font-size:1.25em;color:red" >Please completely fill out the form!</div>';
@@ -249,6 +236,29 @@
         }
     ?>
     <!-- end php code -->
+  
+    <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url(images/dark-background.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
+      <div class="container">
+        <div class="row align-items-center justify-content-center text-center">
+
+          <div class="col-md-10" data-aos="fade-up" data-aos-delay="400">
+            
+            
+            <div class="row justify-content-center mt-5">
+              <div class="col-md-8 text-center">
+                <h1>Sign Up</h1>
+                <!-- <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit</p> -->
+              </div>
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>  
+
+    <!-- <div class="container"> -->
+
     <div class="site-section bg-light">
       <div class="container">
         <div class="row justify-content-center">

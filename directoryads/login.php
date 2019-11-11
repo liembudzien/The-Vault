@@ -1,3 +1,7 @@
+<?php
+// Start the session
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -141,7 +145,8 @@
                 $valid=false;
             } */
             if($valid){
-                echo '<div class="row justify-content-center" style="font-size:1.5em;color:green" >The form has been submitted</div>';
+              $_SESSION["login"] = "yes";
+               // echo '<div class="row justify-content-center" style="font-size:1.5em;color:green" >The form has been submitted</div>';
                 header("Location: memberhome.php") ; // redirects to page named (i.e. listings.php) 
             }
 

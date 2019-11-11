@@ -1,3 +1,17 @@
+<?php
+// Start the session
+session_start();
+if (!(isset($_SESSION["login"]))){
+  $_SESSION["login"] = "no";
+}
+if ($_SESSION["login"] != "yes"){ // != "yes" || $_SESSION["login"] === null || $_SESSION ){
+ // echo "Login is " . $_SESSION["login"] . ".<br>";
+/* }
+else{ */
+  header("Location: index.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -49,10 +63,10 @@
             <nav class="site-navigation position-relative text-right" role="navigation">
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li class="active"><a href="index.html">Home</a></li>
-                <li><a href="listings.html">About</a></li>
+                <li class="active"><a href="index.php">Home</a></li>
+                <li><a href="memberhome.php">Member Home</a></li>
                 <li> <!--  class="has-children"> -->
-                  <a href="about.html">Games</a>
+                  <a href="about.html">About</a>
                   <!-- <ul class="dropdown">
                     <li><a href="#">The Company</a></li>
                     <li><a href="#">The Leadership</a></li>
@@ -62,12 +76,21 @@
                 </li>
                 <!-- <li><a href="blog.html">Blog</a></li> -->
                 <li><a href="buy.php">Subscribe</a></li>
-                <li>Logout</li>
-                <li class="mr-5"><a href="contact.php">Contact Us</a></li>
+                <li class="mr-5"><a href="contact.php">Contact Us</a></li> 
+                <!-- <li class="ml-xl-3 login"><a href="contact.php"><span class="border-left pl-xl-4"></span>Contact Us</a></li> -->
+                <!-- <li class="mr-5"><a href="logout.php" >Logout</a></li> -->
+                
+                <?php 
+                  if ($_SESSION["login"] === "yes"){
+                    ?>
+                    <li class="ml-xl-3 login"><a href="login.php"><span class="border-left pl-xl-4"></span></a></li>
+                    <li><a href="logout.php" class="cta"><span class="bg-primary text-white rounded ">Logout</span></a></li>
+                <?php
+                  }
+                ?>
+              
 
-                <li class="ml-xl-3 login"><a href="login.php"><span class="border-left pl-xl-4"></span>Log In</a></li>
-
-                <li><a href="register.php" class="cta"><span class="bg-primary text-white rounded">Register</span></a></li>
+                <!-- <li><a href="register.php" class="cta"><span class="bg-primary text-white rounded">Register</span></a></li> -->
               </ul>
             </nav>
           </div>
@@ -105,6 +128,19 @@
 
     <div class="site-section">
       <div class="container">
+      <?php
+      //print_r($_SESSION);
+     /*  if (ini_get('register_globals'))
+      {
+          foreach ($_SESSION as $key=>$value)
+          {
+              if (isset($GLOBALS[$key]))
+                  unset($GLOBALS[$key]);
+          }
+      } */
+      //print_r($_SESSION);
+     
+    ?>
         <div class="row">
           <div class="col-lg-8">
 
