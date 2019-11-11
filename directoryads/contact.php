@@ -125,16 +125,17 @@
             $valid=true;
             $subject = $_POST['subject'];
             $message = $_POST['message'];
+            $db_connection = pg_connect("host=ec2-174-129-227-80.compute-1.amazonaws.com port=5432 dbname=d81pqnbohorfk0 user=ddsgwogqfbfyyv password=751ab46d5dac57762560abf99367ea2cac7cf7e81ebab8719935e8d7fd244db3");
 
             // Check if first name has been entered
             if(empty($_POST['first'])){
-                $errFirst= 'Please enter your first name.';
+                $errFirst= 'Please enter your first name, letters only.';
                 $valid=false;
             }
 
             // Check if last name has been entered
             if(empty($_POST['last'])){
-                $errLast= 'Please enter your last name.';
+                $errLast= 'Please enter your last name, letters only.';
                 $valid=false;
             }
             
@@ -157,9 +158,8 @@
             }
 
             if($valid){
-                if($valid){
-                  echo '<div class="row justify-content-center" style="font-size:1.5em;color:green" >The form has been submitted</div>';
-                }
+                echo '<div class="row justify-content-center" style="font-size:1.5em;color:green" >The form has been submitted</div>';
+                $query = "INSERT INTO contact VALUES ('$email', '$first', '$last', '$message', '$subject')";
                 $name = $first . ' ' . $last;
                 $mail = new PHPMailer;
                 $mail->isSMTP();
