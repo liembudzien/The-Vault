@@ -58,8 +58,8 @@ if (!(isset($_SESSION["login"]))){
             <nav class="site-navigation position-relative text-right" role="navigation">
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li class="active"><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
+                <li class="active"><a href="index.php">Home</a></li>
+                <li><a href="about.php">About</a></li>
                 <li> <!--  class="has-children"> -->
                 <?php 
                   if ($_SESSION["login"] === "yes"){ //if you are logged in - show member home page
@@ -257,12 +257,12 @@ if (!(isset($_SESSION["login"]))){
                     </div>
                   </div>
                   <div class="d-block d-md-flex listing vertical">
-                      <a href="minecraft.html" class="img d-block" style="background-image: url('images/minecraft-cover-t.png')"></a>
+                      <a href="minecraft.php" class="img d-block" style="background-image: url('images/minecraft-cover-t.png')"></a>
                       <div class="lh-content">
                         <span class="category">Action &amp; Adventure</span><span class="category">Single Player</span><span class="category">Fantasy</span>
                         <span class="category">Sandbox</span> <span class="category">Multiplayer</span>
                         <a href="#" class="bookmark"><span class="icon-heart"></span></a>
-                        <h3><a href="Games/minecraft.html">Minecraft</a></h3>
+                        <h3><a href="minecraft.php">Minecraft</a></h3>
                         <p class="mb-0">
                           <span class="icon-star text-warning"></span>
                           <span class="icon-star text-warning"></span>

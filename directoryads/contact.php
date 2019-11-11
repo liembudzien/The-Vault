@@ -1,3 +1,10 @@
+<?php
+// Start the session
+session_start();
+if (!(isset($_SESSION["login"]))){
+    $_SESSION["login"] = "no";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -49,24 +56,41 @@
             <nav class="site-navigation position-relative text-right" role="navigation">
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li class="active"><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li> <!--  class="has-children"> -->
-                  <a href="listings.html">Games</a>
+                <li class="active"><a href="index.php">Home</a></li>
+                <li><a href="about.php">About</a></li>
+                <?php 
+                  if ($_SESSION["login"] === "yes"){ //if you are logged in - show member home page
+                    ?>
+                    <li><a href="memberhome.php">Member Home</a></li>
+                <?php
+                  }
+                ?>
                   <!-- <ul class="dropdown">
                     <li><a href="#">The Company</a></li>
                     <li><a href="#">The Leadership</a></li>
                     <li><a href="#">Philosophy</a></li>
                     <li><a href="#">Careers</a></li>
                   </ul> -->
-                </li>
                 <!-- <li><a href="blog.html">Blog</a></li> -->
-                <li><a href="Buy.php">Subscribe</a></li>
+                <li><a href="buy.php">Subscribe</a></li>
                 <li class="mr-5"><a href="contact.php">Contact Us</a></li>
-
-                <li class="ml-xl-3 login"><a href="login.php"><span class="border-left pl-xl-4"></span>Log In</a></li>
-
-                <li><a href="register.php" class="cta"><span class="bg-primary text-white rounded">Register</span></a></li>
+                <?php 
+                  if ($_SESSION["login"] === "yes"){ //if you are logged in - show logout page 
+                    ?>
+                    <li class="ml-xl-3 login"><a href="login.php"><span class="border-left pl-xl-4"></span></a></li>
+                    <li><a href="logout.php" class="cta"><span class="bg-primary text-white rounded ">Logout</span></a></li>
+                <?php
+                  }
+                ?>
+                  <?php 
+                  if ($_SESSION["login"] != "yes"){ // if not logged in show the login and register pages
+                    ?>
+                    <li class="ml-xl-3 login"><a href="login.php"><span class="border-left pl-xl-4"></span>Log In</a></li>
+                    <li><a href="register.php" class="cta"><span class="bg-primary text-white rounded">Register</span></a></li>
+                <?php
+                  }
+                ?>
+                
               </ul>
             </nav>
           </div>

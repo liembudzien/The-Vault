@@ -64,10 +64,10 @@ session_start();
             <nav class="site-navigation position-relative text-right" role="navigation">
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li class="active"><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
+                <li class="active"><a href="index.php">Home</a></li>
+                <li><a href="about.php">About</a></li>
                 <li> <!--  class="has-children"> -->
-                  <a href="listings.html">Games</a>
+                  <!-- <a href="listings.html">Games</a> -->
                   <!-- <ul class="dropdown">
                     <li><a href="#">The Company</a></li>
                     <li><a href="#">The Leadership</a></li>

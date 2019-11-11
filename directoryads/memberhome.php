@@ -4,10 +4,7 @@ session_start();
 if (!(isset($_SESSION["login"]))){
   $_SESSION["login"] = "no";
 }
-if ($_SESSION["login"] != "yes"){ // != "yes" || $_SESSION["login"] === null || $_SESSION ){
- // echo "Login is " . $_SESSION["login"] . ".<br>";
-/* }
-else{ */
+if ($_SESSION["login"] != "yes"){ // if not logged in, redirect
   header("Location: index.php");
 }
 
@@ -66,7 +63,7 @@ else{ */
                 <li class="active"><a href="index.php">Home</a></li>
                 <li><a href="memberhome.php">Member Home</a></li>
                 <li> <!--  class="has-children"> -->
-                  <a href="about.html">About</a>
+                  <a href="about.php">About</a>
                   <!-- <ul class="dropdown">
                     <li><a href="#">The Company</a></li>
                     <li><a href="#">The Leadership</a></li>
@@ -79,9 +76,16 @@ else{ */
                 <li class="mr-5"><a href="contact.php">Contact Us</a></li> 
                 <!-- <li class="ml-xl-3 login"><a href="contact.php"><span class="border-left pl-xl-4"></span>Contact Us</a></li> -->
                 <!-- <li class="mr-5"><a href="logout.php" >Logout</a></li> -->
-                
                 <?php 
-                  if ($_SESSION["login"] === "yes"){
+                  if ($_SESSION["login"] === "yes"){ //if you are logged in - show logout page 
+                    ?>
+                    <li class="ml-xl-3 login"><a href="login.php"><span class="border-left pl-xl-4"></span></a></li>
+                    <li><a href="logout.php" class="cta"><span class="bg-primary text-white rounded ">Logout</span></a></li>
+                <?php
+                  }
+                ?>
+                <?php 
+                  if ($_SESSION["login"] != "yes"){ //This should be impossible 
                     ?>
                     <li class="ml-xl-3 login"><a href="login.php"><span class="border-left pl-xl-4"></span></a></li>
                     <li><a href="logout.php" class="cta"><span class="bg-primary text-white rounded ">Logout</span></a></li>
@@ -148,12 +152,12 @@ else{ */
               <div class="col-lg-6">
                 
                 <div class="d-block d-md-flex listing vertical">
-                  <a href="minecraft.html" class="img d-block" style="background-image: url('images/minecraft-cover-t.png')"></a>
+                  <a href="minecraft.php" class="img d-block" style="background-image: url('images/minecraft-cover-t.png')"></a>
                   <div class="lh-content">
                     <span class="category">Action &amp; Adventure</span><span class="category">Single Player</span><span class="category">Fantasy</span>
                     <span class="category">Sandbox</span> <span class="category">Multiplayer</span>
                     <a href="#" class="bookmark"><span class="icon-heart"></span></a>
-                    <h3><a href="Games/minecraft.html">Minecraft</a></h3>
+                    <h3><a href="minecraft.php">Minecraft</a></h3>
                     <p class="mb-0">
                       <span class="icon-star text-warning"></span>
                       <span class="icon-star text-warning"></span>

@@ -61,7 +61,7 @@ session_destroy();
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li class="active"><a href="index.php">Home</a></li>
-                <li><a href="about.html">About</a></li>
+                <li><a href="about.php">About</a></li>
                 <li> <!--  class="has-children"> -->
                   <!-- <a href="listings.html">Games</a> -->
                   <!-- <ul class="dropdown">
@@ -103,13 +103,20 @@ session_destroy();
             
             
             <div class="row justify-content-center mb-4">
+                
               <div class="col-md-8 text-center">
+                 
                 <h1 class="" data-aos="fade-up">Welcome To The Vault</h1>
+                
                 <p data-aos="fade-up" data-aos-delay="100"> </p>
+                
               </div>
             </div>
-            
             <div class="form-search-wrap mb-3" data-aos="fade-up" data-aos-delay="200">
+                <p class="row justify-content-center" style="font-size:1.5em;color:green" > You have been logged out!</p>
+            </div>
+            <div class="form-search-wrap mb-3" data-aos="fade-up" data-aos-delay="200">
+            
               <form class="form-inline" method="post">
                 <!-- <div class="row align-items-center"> 
                   <div class="col-lg-12 mb-2 mb-xl-0 col-xl-6">-->
@@ -166,7 +173,7 @@ session_destroy();
     </div>  
 
     <div class="site-section">
-    <p class="row justify-content-center" style="font-size:1.5em;color:green" > You have been logged out!</p>
+    
       <div class="container">
      
         <div class="row align-items-center">
@@ -237,12 +244,12 @@ session_destroy();
                     </div>
                   </div>
                   <div class="d-block d-md-flex listing vertical">
-                      <a href="minecraft.html" class="img d-block" style="background-image: url('images/minecraft-cover-t.png')"></a>
+                      <a href="minecraft.php" class="img d-block" style="background-image: url('images/minecraft-cover-t.png')"></a>
                       <div class="lh-content">
                         <span class="category">Action &amp; Adventure</span><span class="category">Single Player</span><span class="category">Fantasy</span>
                         <span class="category">Sandbox</span> <span class="category">Multiplayer</span>
                         <a href="#" class="bookmark"><span class="icon-heart"></span></a>
-                        <h3><a href="Games/minecraft.html">Minecraft</a></h3>
+                        <h3><a href="minecraft.php">Minecraft</a></h3>
                         <p class="mb-0">
                           <span class="icon-star text-warning"></span>
                           <span class="icon-star text-warning"></span>
