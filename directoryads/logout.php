@@ -1,9 +1,11 @@
 <?php
 // Start the session
 session_start();
-if (!(isset($_SESSION["login"]))){
-  $_SESSION["login"] = "no";
-}
+// remove all session variables
+session_unset();
+
+// destroy the session
+session_destroy(); 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,16 +63,7 @@ if (!(isset($_SESSION["login"]))){
                 <li class="active"><a href="index.php">Home</a></li>
                 <li><a href="about.php">About</a></li>
                 <li> <!--  class="has-children"> -->
-                <?php 
-                  if ($_SESSION["login"] === "yes"){ //if you are logged in - show member home page
-                    ?>
-                    <a href="memberhome.php">Member Home</a>
-                    <li><a href="buy.php">Subscribe</a></li>
-                <?php
-                  }
-                ?>
-              
-                  
+                  <!-- <a href="listings.html">Games</a> -->
                   <!-- <ul class="dropdown">
                     <li><a href="#">The Company</a></li>
                     <li><a href="#">The Leadership</a></li>
@@ -79,24 +72,12 @@ if (!(isset($_SESSION["login"]))){
                   </ul> -->
                 </li>
                 <!-- <li><a href="blog.html">Blog</a></li> -->
+               
                 <li class="mr-5"><a href="contact.php">Contact Us</a></li>
-                <?php 
-                  if ($_SESSION["login"] === "yes"){ //if you are logged in - show logout page 
-                    ?>
-                    <li class="ml-xl-3 login"><a href="login.php"><span class="border-left pl-xl-4"></span></a></li>
-                    <li><a href="logout.php" class="cta"><span class="bg-primary text-white rounded ">Logout</span></a></li>
-                <?php
-                  }
-                ?>
-                  <?php 
-                  if ($_SESSION["login"] != "yes"){
-                    ?>
-                    <li class="ml-xl-3 login"><a href="login.php"><span class="border-left pl-xl-4"></span>Log In</a></li>
-                    <li><a href="register.php" class="cta"><span class="bg-primary text-white rounded">Register</span></a></li>
-                <?php
-                  }
-                ?>
-                
+
+                <li class="ml-xl-3 login"><a href="login.php"><span class="border-left pl-xl-4"></span>Log In</a></li>
+
+                <li><a href="register.php" class="cta"><span class="bg-primary text-white rounded">Register</span></a></li>
               </ul>
             </nav>
           </div>
@@ -122,13 +103,20 @@ if (!(isset($_SESSION["login"]))){
             
             
             <div class="row justify-content-center mb-4">
+                
               <div class="col-md-8 text-center">
-                <h1 class="" data-aos="fade-up">Welcome To Vault</h1>
+                 
+                <h1 class="" data-aos="fade-up">Welcome To The Vault</h1>
+                
                 <p data-aos="fade-up" data-aos-delay="100"> </p>
+                
               </div>
             </div>
-            
             <div class="form-search-wrap mb-3" data-aos="fade-up" data-aos-delay="200">
+                <p class="row justify-content-center" style="font-size:1.5em;color:green" > You have been logged out!</p>
+            </div>
+            <div class="form-search-wrap mb-3" data-aos="fade-up" data-aos-delay="200">
+            
               <form class="form-inline" method="post">
                 <!-- <div class="row align-items-center"> 
                   <div class="col-lg-12 mb-2 mb-xl-0 col-xl-6">-->
@@ -185,10 +173,9 @@ if (!(isset($_SESSION["login"]))){
     </div>  
 
     <div class="site-section">
+    
       <div class="container">
-      <?php
-       // print_r($_SESSION); 
-        ?>
+     
         <div class="row align-items-center">
           <div class="col-md-6">
            <!--  <img src="images/gamelogos.jpg" alt="Image" class="img-fluid rounded"> -->

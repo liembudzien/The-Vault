@@ -2,16 +2,14 @@
 // Start the session
 session_start();
 if (!(isset($_SESSION["login"]))){
-  $_SESSION["login"] = "no";
+    $_SESSION["login"] = "no";
 }
-if ($_SESSION["login"] != "yes"){ // if not logged in, redirect
-  header("Location: login.php");
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>The Vault - Buy Now</title>
+    <title>The Vault - About</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -32,8 +30,7 @@ if ($_SESSION["login"] != "yes"){ // if not logged in, redirect
     <link rel="stylesheet" href="css/rangeslider.css">
 
     <link rel="stylesheet" href="css/style.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
   </head>
   <body>
   
@@ -65,8 +62,8 @@ if ($_SESSION["login"] != "yes"){ // if not logged in, redirect
                 <?php 
                   if ($_SESSION["login"] === "yes"){ //if you are logged in - show member home page
                     ?>
-                    <li><a href="buy.php">Subscribe</a></li>
                     <li><a href="memberhome.php">Member Home</a></li>
+                    <li><a href="buy.php">Subscribe</a></li>
                 <?php
                   }
                 ?>
@@ -95,7 +92,6 @@ if ($_SESSION["login"] != "yes"){ // if not logged in, redirect
                 <?php
                   }
                 ?>
-                
               </ul>
             </nav>
           </div>
@@ -120,8 +116,8 @@ if ($_SESSION["login"] != "yes"){ // if not logged in, redirect
             
             <div class="row justify-content-center mt-5">
               <div class="col-md-8 text-center">
-                <h1>Buy Now!</h1>
-                <p class="mb-0">---</p>
+                <h1>About Us</h1>
+                <p class="mb-0">Why we're not your typical gaming product</p>
               </div>
             </div>
 
@@ -132,98 +128,149 @@ if ($_SESSION["login"] != "yes"){ // if not logged in, redirect
     </div>  
 
 
-    <div class="site-section ">
-
-    <div class="container">
-<div class="row">
-  <div class="col-md-4 mb-lg-5">
-	<figure class="card card-product">
-		<div class="img-wrap"><img src="images/1-month.png" alt="Image" class="img-fluid mb-1"></div>
-		<figcaption class="info-wrap">
-				<h4 class="title"> 1 Month All Access</h4>
-				<p class="desc">Get 1 month of access to all games</p>
-    </figcaption>
-    	<div class="price-wrap h5">
-				<span class="price-new"> $15.99</span> <del class="price-old"> $19.99</del>
-			</div> <!-- price-wrap.// -->
-		<div class="bottom-wrap">
-			
-    <form action="https://test.bitpay.com/checkout" method="post" >
-  <input type="hidden" name="action" value="cartAdd" />
-  <input type="hidden" name="data" value="PA7Y1TcQGm55E18KZ9Vrfk" />
-  <input type="image" src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg" name="submit" style="width: 168px;" alt="BitPay, the easy way to pay with bitcoins." >
-</form>
-		
-		</div> <!-- bottom-wrap.// -->
-	</figure>
-</div> <!-- col // -->
-<div class="col-md-4 mb-lg-5">
-	<figure class="card card-product">
-		<div class="img-wrap"><img src="images/6-months.png" alt="Image" class="img-fluid mb-1"></div>
-		<figcaption class="info-wrap">
-				<h4 class="title"> 6 Month All Access</h4>
-				<p class="desc">Get 6 months of access to all games</p>
-    </figcaption>
-    	<div class="price-wrap h5">
-				<span class="price-new"> $77.99</span> <del class="price-old"> $95.99</del> <mark class="bg-info"> Save 20%</mark>  
-			</div> <!-- price-wrap.// -->
-		<div class="bottom-wrap">
-			
-    <form action="https://test.bitpay.com/checkout" method="post" >
-  <input type="hidden" name="action" value="cartAdd" />
-  <input type="hidden" name="data" value="NCwJeVrvC8hLcGiskvcKtg" />
-  <input type="image" src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg" name="submit" style="width: 168px;" alt="BitPay, the easy way to pay with bitcoins." >
-</form>
-		
-		</div> <!-- bottom-wrap.// -->
-  </figure>
-    </div>
-  <div class="col-md-4 mb-lg-5">
-	<figure class="card card-product">
-		<div class="img-wrap"><img src="images/1-year.png" alt="Image" class="img-fluid mb-1"></div>
-		<figcaption class="info-wrap">
-				<h4 class="title"> 1 Year All Access</h4>
-				<p class="desc">Get 1 Year of access to all games</p>
-    </figcaption>
-    	<div class="price-wrap h5">
-				<span class="price-new"> $107.99</span> <del class="price-old"> $191.99</del> <mark class="bg-info"> Save 45%</mark>  
-			</div> <!-- price-wrap.// -->
-		<div class="bottom-wrap">
-			
-    <form action="https://test.bitpay.com/checkout" method="post" >
-  <input type="hidden" name="action" value="cartAdd" />
-  <input type="hidden" name="data" value="5fED291gTrqXpxRSWT97Ur" />
-  <input type="image" src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg" name="submit" style="width: 168px;" alt="BitPay, the easy way to pay with bitcoins." >
-</form>
-		
-		</div> <!-- bottom-wrap.// -->
-	</figure>
-</div> <!-- col // -->
-</div> <!-- row.// -->
-</div>
-</div> 
-
-  
-
-
-    <div class="newsletter bg-primary py-5">
+    <div class="site-section">
       <div class="container">
+          <?php
+           
+          ?>
         <div class="row align-items-center">
           <div class="col-md-6">
-            <h2>Sign up for updates to our product!</h2>
-            <p>To hear the latest updates and promotions, enter your email on the right.</p>
+            <img src="images/gamelogos.jpg" alt="Image" class="img-fluid rounded">
           </div>
-          <div class="col-md-6">
-            
-            <form class="d-flex">
-              <input type="text" class="form-control" placeholder="Email">
-              <input type="submit" value="Subscribe" class="btn btn-white"> 
-            </form>
+          <div class="col-md-5 ml-auto">
+            <h2 class="text-primary mb-3">Why The Vault</h2>
+            <p>We do gaming differently. We dont nickel and dime, instead, we charge a flat rate for a single, solid product.</p>
+            <p class="mb-4">No hidden fees or prices. Enjoy access to a wide and diverse collection of games from top developers. Discover new games
+              or play your favorites, all for one low subscription price.</p>
+
+            <ul class="ul-check list-unstyled primary">
+              <li>No hidden or additional fees</li>
+              <li>Unlimited access to games</li>
+              <li>No ads or limitations to your games</li>
+            </ul>
+              <p><a href="register.html" class="">Sign Up for a Free Trial</a></p>
           </div>
         </div>
       </div>
     </div>
-    
+
+    <div class="site-section"  data-aos="fade">
+      <div class="container">
+        
+        
+        <div class="row  mb-5">
+          <div class="col-12">
+            <img src="images/gamer.jpg" alt="Image" class="img-fluid mb-5">
+          </div>
+        </div>
+        <div class="row mb-5">
+
+          <div class="col-md-4 ml-auto">
+            <p>We offer a single subscription to our gaming library, which grants you access to every game with unlimited playing time. Instead of selling a single game,
+              you are able to purchase access to thousands of games for the cost of a fraction of a game per month.</p>
+            <p><a href="listings.html" class="">See Games</a></p>
+          </div>
+          <div class="col-md-4">
+            <p>From your favorite Triple-A titles to indie gems, discover our wide selection of games available in our package. Choose to subscribe to either a monthly plan,
+              or save by purchasing our annual gaming pass.</p>
+            <p><a href="register.html" class="">Sign Up</a></p>
+          </div>
+        </div>
+
+        <div class="row mb-5 mt-5">
+          <div class="col-md-4 text-left border-primary">
+            <h2 class="font-weight-light text-primary pb-3">Our Team</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
+            <img src="images/person_3.jpg" alt="Image" class="img-fluid mb-3">
+            <h3 class="h4">Liem Budzien</h3>
+            <p class="caption mb-3 text-primary">Founder</p>
+            <p>A second year CS major at UVA, Liem has been with The Vault since September, 2019.</p>
+          </div>
+          <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
+            <img src="images/person_1.jpg" alt="Image" class="img-fluid mb-3">
+            <h3 class="h4">Anna Karoll</h3>
+            <p class="caption mb-3 text-primary">Founder</p>
+            <p>Anna Karoll has been with the project since 2019, working to expand the current selection of games.</p>
+          </div>
+          <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
+            <img src="images/person_2.jpg" alt="Image" class="img-fluid mb-3">
+            <h3 class="h4">Hattan Khalil</h3>
+            <p class="caption mb-3 text-primary">Founder</p>
+            <p>A computer science student at UVA, Hattan works at The Vault building the online gaming system.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  
+
+    <div class="site-section bg-light">
+      <div class="container">
+
+        <div class="row justify-content-center mb-5">
+          <div class="col-md-7 text-center border-primary">
+            <h2 class="font-weight-light text-primary">Testimonials</h2>
+          </div>
+        </div>
+
+        <div class="slide-one-item home-slider owl-carousel">
+          <div>
+            <div class="testimonial">
+              <figure class="mb-4">
+                <img src="images/person_3.jpg" alt="Image" class="img-fluid mb-3">
+                <p>John Smith</p>
+              </figure>
+              <blockquote>
+                <p>&ldquo;The Vault has been a great way for me to save money. Instead of buying all of my Triple-A games, I use The Vault to play all of my
+                    favorite games for a fraction of the cost. I can't imagine going back to paying for individual games!&rdquo;</p>
+              </blockquote>
+            </div>
+          </div>
+          <div>
+            <div class="testimonial">
+              <figure class="mb-4">
+                <img src="images/person_5.jpg" alt="Image" class="img-fluid mb-3">
+                <p>Christine Aguilar</p>
+              </figure>
+              <blockquote>
+                <p>&ldquo;Sometimes it's hard to discover indie games from smaller developers. The Vault has made it easy for me to find games that I enjoy
+                    with their curated collection of high quality games. The days of browsing Steam for hours are gone.&rdquo;</p>
+              </blockquote>
+            </div>
+          </div>
+
+          <div>
+            <div class="testimonial">
+              <figure class="mb-4">
+                <img src="images/person_4.jpg" alt="Image" class="img-fluid mb-3">
+                <p>Robert Spears</p>
+              </figure>
+              <blockquote>
+                <p>&ldquo;As a casual gamer, The Vault has made it accessible to play a wide variety of games. Instead of paying for games I rarely play,
+                    the low monthly cost makes it possible to try out a variety of games to find my favorites.&rdquo;</p>
+              </blockquote>
+            </div>
+          </div>
+
+          <div>
+            <div class="testimonial">
+              <figure class="mb-4">
+                <img src="images/person_2.jpg" alt="Image" class="img-fluid mb-3">
+                <p>Bruce Rogers</p>
+              </figure>
+              <blockquote>
+                <p>&ldquo;If you're a parent, this is the perfect gift for your kids. Without ads or hidden fees, I can let my kids play their games with
+                    peace of mind that they are getting a high quality experience without getting trapped into expensive habits!&rdquo;</p>
+              </blockquote>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
    
 
     

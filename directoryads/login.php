@@ -1,3 +1,7 @@
+<?php
+// Start the session
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -49,10 +53,10 @@
             <nav class="site-navigation position-relative text-right" role="navigation">
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li class="active"><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
+                <li class="active"><a href="index.php">Home</a></li>
+                <li><a href="about.php">About</a></li>
                 <li> <!--  class="has-children"> -->
-                  <a href="listings.html">Games</a>
+                  <!-- <a href="listings.html">Games</a> -->
                   <!-- <ul class="dropdown">
                     <li><a href="#">The Company</a></li>
                     <li><a href="#">The Leadership</a></li>
@@ -61,7 +65,7 @@
                   </ul> -->
                 </li>
                 <!-- <li><a href="blog.html">Blog</a></li> -->
-                <li><a href="buy.php">Subscribe</a></li>
+                
                 
                 <li class="mr-5"><a href="contact.php">Contact Us</a></li>
 
@@ -141,13 +145,15 @@
                 $valid=false;
             } */
             if($valid){
-                echo '<div class="row justify-content-center" style="font-size:1.5em;color:green" >The form has been submitted</div>';
+              $_SESSION["login"] = "yes";
+               // echo '<div class="row justify-content-center" style="font-size:1.5em;color:green" >The form has been submitted</div>';
                 header("Location: memberhome.php") ; // redirects to page named (i.e. listings.php) 
             }
 
         }
     ?>
     <!-- end php code -->
+      </div>
     <div class="site-section bg-light">
       <div class="container">
         <div class="row justify-content-center">
@@ -165,24 +171,6 @@
                     <?php echo $errEmail;?>
                 </div>
             </div>
-            
-            <!-- <div class="form-group row">
-                <label for="inputUser" class="col-sm-2 col-form-label">Username</label>
-                <div class="col-sm-10">
-                    <input type="text"  id="inputUser" name="user" placeholder="Username"  class="<?php 
-                      /* if($errName == "" && ($name != "")){
-                        echo $yvalid;
-                      }
-                      else if($errName != ""){
-                        echo $invalid;
-                      }
-                      else{
-                        echo $emp;
-                      } */ ?>" 
-                    value="<?php //echo $name; ?>">
-                    <?php //echo $errName; ?>
-                </div>
-            </div> -->
 
             <div class="form-group row">
                 <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
@@ -197,52 +185,7 @@
                     <input type="submit" value="login" name="submit" class="btn btn-primary"/>
                 </div>
             </div>
-             <!--  
-               <div class="form-group has-success has-feedback row">
-            <label class="col-sm-2 control-label" for="inputpassword">
-                  Password</label>
-            <div class="col-sm-10">
-              <input type="password" class="form-control" id="inputPassword" name="password" placeholder="password" value="<?php //echo $password; ?>">
-              <span class="glyphicon glyphicon-ok form-control-feedback"></span>
-              <?php //echo $errPass; ?>
-            </div>
-               
-               
-               <div class="row form-group">
-                <div class="col-md-12">
-                  <label class="text-black" for="email">Email</label> 
-                  <input type="email" id="email" class="form-control">
-                </div>
-              </div>
-
-              <div class="row form-group">
-                <div class="col-md-12">
-                  <label class="text-black" for="subject">Password</label> 
-                  <input type="password" id="subject" class="form-control">
-                </div>
-              </div>
-
-              <div class="row form-group">
-                <div class="col-md-12">
-                  <label class="text-black" for="subject">Re-type Password</label> 
-                  <input type="password" id="subject" class="form-control">
-                </div>
-              </div>
-
-              <div class="row form-group">
-                <div class="col-12">
-                  <p>Have an account? <a href="login.html">Log In</a></p>
-                </div>
-              </div>
-
-              <div class="row form-group">
-                <div class="col-md-12">
-                  <input type="submit" value="Sign In" class="btn btn-primary py-2 px-4 text-white">
-                </div>
-              </div> -->
-              
-
-  
+            
             </form>
           </div>
           

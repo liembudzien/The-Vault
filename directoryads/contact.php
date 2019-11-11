@@ -1,3 +1,10 @@
+<?php
+// Start the session
+session_start();
+if (!(isset($_SESSION["login"]))){
+    $_SESSION["login"] = "no";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -49,24 +56,42 @@
             <nav class="site-navigation position-relative text-right" role="navigation">
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li class="active"><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li> <!--  class="has-children"> -->
-                  <a href="listings.html">Games</a>
+                <li class="active"><a href="index.php">Home</a></li>
+                <li><a href="about.php">About</a></li>
+                <?php 
+                  if ($_SESSION["login"] === "yes"){ //if you are logged in - show member home page
+                    ?>
+                    <li><a href="memberhome.php">Member Home</a></li>
+                    <li><a href="buy.php">Subscribe</a></li>
+                <?php
+                  }
+                ?>
                   <!-- <ul class="dropdown">
                     <li><a href="#">The Company</a></li>
                     <li><a href="#">The Leadership</a></li>
                     <li><a href="#">Philosophy</a></li>
                     <li><a href="#">Careers</a></li>
                   </ul> -->
-                </li>
                 <!-- <li><a href="blog.html">Blog</a></li> -->
-                <li><a href="Buy.php">Subscribe</a></li>
+                
                 <li class="mr-5"><a href="contact.php">Contact Us</a></li>
-
-                <li class="ml-xl-3 login"><a href="login.php"><span class="border-left pl-xl-4"></span>Log In</a></li>
-
-                <li><a href="register.php" class="cta"><span class="bg-primary text-white rounded">Register</span></a></li>
+                <?php 
+                  if ($_SESSION["login"] === "yes"){ //if you are logged in - show logout page 
+                    ?>
+                    <li class="ml-xl-3 login"><a href="login.php"><span class="border-left pl-xl-4"></span></a></li>
+                    <li><a href="logout.php" class="cta"><span class="bg-primary text-white rounded ">Logout</span></a></li>
+                <?php
+                  }
+                ?>
+                  <?php 
+                  if ($_SESSION["login"] != "yes"){ // if not logged in show the login and register pages
+                    ?>
+                    <li class="ml-xl-3 login"><a href="login.php"><span class="border-left pl-xl-4"></span>Log In</a></li>
+                    <li><a href="register.php" class="cta"><span class="bg-primary text-white rounded">Register</span></a></li>
+                <?php
+                  }
+                ?>
+                
               </ul>
             </nav>
           </div>
@@ -125,16 +150,17 @@
             $valid=true;
             $subject = $_POST['subject'];
             $message = $_POST['message'];
+            $db_connection = pg_connect("host=ec2-174-129-227-80.compute-1.amazonaws.com port=5432 dbname=d81pqnbohorfk0 user=ddsgwogqfbfyyv password=751ab46d5dac57762560abf99367ea2cac7cf7e81ebab8719935e8d7fd244db3");
 
             // Check if first name has been entered
-            if(empty($_POST['first'])){
-                $errFirst= 'Please enter your first name.';
+            if(empty($_POST['first']) || (preg_match("/^[a-zA-Z]+$/", $_POST["first"]) === 0)){
+                $errFirst= 'Please enter your first name, letters only.';
                 $valid=false;
             }
 
             // Check if last name has been entered
-            if(empty($_POST['last'])){
-                $errLast= 'Please enter your last name.';
+            if(empty($_POST['last']) || (preg_match("/^[a-zA-Z]+$/", $_POST["last"]) === 0)){
+                $errLast= 'Please enter your last name, letters only.';
                 $valid=false;
             }
             
@@ -157,9 +183,10 @@
             }
 
             if($valid){
-                if($valid){
-                  echo '<div class="row justify-content-center" style="font-size:1.5em;color:green" >The form has been submitted</div>';
-                }
+                echo '<div class="row justify-content-center" style="font-size:1.5em;color:green" >The form has been submitted</div>';
+                $query = "INSERT INTO contact VALUES ('$email', '$first', '$last', '$message', '$subject')";
+                $result = pg_query($db_connection, $query);
+
                 $name = $first . ' ' . $last;
                 $mail = new PHPMailer;
                 $mail->isSMTP();
