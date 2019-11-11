@@ -146,7 +146,7 @@ if (!(isset($_SESSION["login"]))){
 			
     <form action="https://test.bitpay.com/checkout" method="post" >
   <input type="hidden" name="action" value="cartAdd" />
-  <input type="hidden" name="data" value="XsiEHcigLBZhUFu89hQ2uS" />
+  <input type="hidden" name="data" value="PA7Y1TcQGm55E18KZ9Vrfk" />
   <input type="image" src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg" name="submit" style="width: 168px;" alt="BitPay, the easy way to pay with bitcoins." >
 </form>
 		
@@ -167,7 +167,7 @@ if (!(isset($_SESSION["login"]))){
 			
     <form action="https://test.bitpay.com/checkout" method="post" >
   <input type="hidden" name="action" value="cartAdd" />
-  <input type="hidden" name="data" value="9B4Ab9mfkciVKjs6ffpzoS" />
+  <input type="hidden" name="data" value="NCwJeVrvC8hLcGiskvcKtg" />
   <input type="image" src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg" name="submit" style="width: 168px;" alt="BitPay, the easy way to pay with bitcoins." >
 </form>
 		
@@ -188,7 +188,7 @@ if (!(isset($_SESSION["login"]))){
 			
     <form action="https://test.bitpay.com/checkout" method="post" >
   <input type="hidden" name="action" value="cartAdd" />
-  <input type="hidden" name="data" value="5gbsrAr6gff5Hp3iZuYvE1" />
+  <input type="hidden" name="data" value="5fED291gTrqXpxRSWT97Ur" />
   <input type="image" src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg" name="submit" style="width: 168px;" alt="BitPay, the easy way to pay with bitcoins." >
 </form>
 		
