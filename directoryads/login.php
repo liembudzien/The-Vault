@@ -26,7 +26,9 @@ session_start();
     <link rel="stylesheet" href="css/rangeslider.css">
 
     <link rel="stylesheet" href="css/style.css">
-    
+    <style>
+      .error {color: #FF0000;}
+    </style>
   </head>
   <body>
   
@@ -112,7 +114,7 @@ session_start();
         $yvalid = "form-control is-valid";
         $invalid = "form-control is-invalid";
         $emp = "form-control";
-        $errEmail = $errPass= $errName="";
+        $errEmail = $errPass= $errName=$errMatch = $errDuplicate = $errForm="";
         $email = $name = $password = "";
         
         if(isset($_POST["submit"])) {
@@ -124,7 +126,7 @@ session_start();
             $db_connection = pg_connect("host=ec2-174-129-227-80.compute-1.amazonaws.com port=5432 dbname=d81pqnbohorfk0 user=ddsgwogqfbfyyv password=751ab46d5dac57762560abf99367ea2cac7cf7e81ebab8719935e8d7fd244db3");
 
             // Check if name has been entered
-           /*  if(empty($_POST['user'])){
+            /*  if(empty($_POST['user'])){
                 $errName= 'Please enter your user name';
                 $valid=false;
             } */
@@ -138,8 +140,29 @@ session_start();
                 $errPass = '<p class="errText">Password must be at least 8 characters and must contain at least one lower case letter, one upper case letter and one digit</p>';
                 $valid=false;
             } 
-            /* $test = pg_query($db_connection, "SELECT * from users where email='$email'");
-            $num_rows = pg_affected_rows($test);
+            $test2 = pg_query($db_connection, "SELECT * from users where email='$email'");
+            $num_rows = pg_affected_rows($test2);
+            if($num_rows <= 0){
+                $errDuplicate = '<p class="errText">No email address on file</p>';
+                $valid=false;
+            }
+            $test = pg_query($db_connection, "SELECT password from users where email='$email'");
+            $pulledRow = pg_fetch_row($test);
+            $pass = password_verify ( $password, $pulledRow[0] ); //compares entred password (which it hashes) with the hash of the password in the database 
+            if ( $pass ) {
+            /*extra code to rehash the password    
+              if ( password_needs_rehash ( $hashed_password, PASSWORD_DEFAULT ) ) {
+                $newHash = password_hash( $password, PASSWORD_DEFAULT );
+                /* UPDATE the user's row in `log_user` to store $newHash */
+              } 
+              /* log the user in, have fun! */
+            
+            else {
+              /* tell the would-be user the username/password combo is invalid */
+              $errMatch = '<p class="errText">Password is incorrect</p>';
+              $valid = false;
+            }
+            /*$num_rows = pg_affected_rows($test);
             if($num_rows > 0){
                 $errDuplicate = '<p class="errText">Duplicate email address</p>';
                 $valid=false;
@@ -149,13 +172,16 @@ session_start();
                // echo '<div class="row justify-content-center" style="font-size:1.5em;color:green" >The form has been submitted</div>';
                 header("Location: memberhome.php") ; // redirects to page named (i.e. listings.php) 
             }
-
+            else{
+              $errForm = "Please completely fill out the form!";
+            }
         }
     ?>
     <!-- end php code -->
       </div>
     <div class="site-section bg-light">
       <div class="container">
+      <div class="row justify-content-center" style="font-size:1.5em;color:red" ><?php echo $errForm; ?></div>
         <div class="row justify-content-center">
           <div class="col-md-7 mb-5"  data-aos="fade">
 
@@ -167,16 +193,51 @@ session_start();
             <div class="form-group row">
                 <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail" name="email" title="All emails must have @ "placeholder="Email" value="<?php echo $email; ?>" autofocus>
-                    <?php echo $errEmail;?>
+                <input type="text" id="inputEmail" name="email" 
+                  placeholder="Email" class="<?php 
+                      if($errEmail == "" && ($email != "") && $errDuplicate == ""){ //if there is no error set and a email has been entered
+                        echo $yvalid; //change box to green
+                      }
+                      else if($errEmail != ""){ //if there is an error message outprinted 
+                        echo $invalid; //change box to red
+                      }
+                      else if($errDuplicate != ""){
+                        echo $invalid;
+                      }
+                      else{
+                        echo $emp;//otherwise have box grey
+                      } ?>" 
+                    value="<?php echo $email; ?>" autofocus> <!-- title tells what the issue is if the text entered doesn't match the pattern, 
+                    pattern is a regrex saying that it must be at least one to many nums of chars followed by @ followed by at least one to many num of char followed by . followed by at least one to many chars  
+                    value says retain the inputed value even when the form does not pass validation-->
+                    <span class="error"> <?php echo $errEmail;?> </span>   <!-- if it fails validation, print out the error message in red-->
+                    <span class="error"> <?php echo $errDuplicate;?> </span>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}" title="must be 8 char long, one upper, one lower, and at least 1 number" value="<?php echo $password; ?>">
-                    <?php echo $errPass; ?>
+                <input type="password" id="inputPassword" name="password" 
+                  placeholder="Password" class="<?php 
+                      if($errPass == "" && ($password != "") && $errMatch == ""){ //if there is no error set and a email has been entered
+                        echo $yvalid; //change box to green
+                      }
+                      else if($errPass != ""){ //if there is an error message outprinted 
+                        echo $invalid; //change box to red
+                      }
+                      else if($errMatch != ""){
+                        echo $invalid;
+                      }
+                      else{
+                        echo $emp;//otherwise have box grey
+                      } ?>" 
+                    value="<?php echo $password; ?>" autofocus> <!-- title tells what the issue is if the text entered doesn't match the pattern, 
+                    pattern is a regrex saying that it must be at least one to many nums of chars followed by @ followed by at least one to many num of char followed by . followed by at least one to many chars  
+                    value says retain the inputed value even when the form does not pass validation-->
+                    <span class="error"> <?php echo $errPass;?> </span>   <!-- if it fails validation, print out the error message in red-->
+                    <span class="error"> <?php echo $errMatch;?> </span>
+                   
                 </div>
             </div>
 

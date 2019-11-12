@@ -106,7 +106,7 @@ session_start();
         $invalid = "form-control is-invalid";
         $emp = "form-control";
         //vars for the inputs and the error messages 
-        $errEmail = $errPass= $errName= $errAddr= $errZipcode= $errState= $errDuplicate = $errCity= "";
+        $errEmail = $errPass= $errName= $errAddr= $errZipcode= $errState= $errDuplicate = $errCity= $errForm= "";
         $email = $name = $password = $address= $state= $zipcode= $city= "";
         
         if(isset($_POST["submit"])) {
@@ -231,7 +231,8 @@ session_start();
                
             }
             else{
-              echo '<div class="row justify-content-center" style="font-size:1.25em;color:red" >Please completely fill out the form!</div>';
+              $errForm = "Please completely fill out the form!";
+              //echo '<div class="row justify-content-center" style="font-size:1.25em;color:red" >Please completely fill out the form!</div>';
             }
         }
     ?>
@@ -261,9 +262,11 @@ session_start();
 
     <div class="site-section bg-light">
       <div class="container">
+      <div class="row justify-content-center" style="font-size:1.5em;color:red" ><?php echo $errForm; ?></div>
         <div class="row justify-content-center">
+        
           <div class="col-md-7 mb-5"  data-aos="fade">
-
+        
             <h2 class="mb-5 text-black">Register</h2>
 
             <!-- <form action="#" class="p-5 bg-white"> -->
