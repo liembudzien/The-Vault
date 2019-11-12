@@ -83,7 +83,15 @@ session_start();
 
         </div>
       <!-- </div> -->
-      
+      <!--Testing
+                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+              $name = test_input($_POST["name"]);
+              $email = test_input($_POST["email"]);
+              $website = test_input($_POST["website"]);
+              $comment = test_input($_POST["comment"]);
+              $gender = test_input($_POST["gender"]);
+            }
+          -->
     </header>
 
   
@@ -114,7 +122,7 @@ session_start();
         $emp = "form-control";
         $errEmail = $errPass= $errName="";
         $email = $name = $password = "";
-        
+        z
         if(isset($_POST["submit"])) {
             $email = $_POST['email'];
             //$name = $_POST['user'];
