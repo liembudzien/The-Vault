@@ -167,6 +167,36 @@ session_start();
                 $errDuplicate = '<p class="errText">Duplicate email address</p>';
                 $valid=false;
             } */
+            /*            
+            Something like this:
+
+             $test = pg_query($db_connection, "SELECT * from users where email='$email'");
+            $num_rows = pg_affected_rows($test);
+            if($num_rows > 0){
+                $errDuplicate = '<p class="errText">Duplicate email address</p>';
+                $valid=false;
+            } */
+            //<!--
+            //$db = $db_connection; 
+                
+                # Get username and password from the login form 
+               // $name = $_POST['user'];
+                //$password = $_POST['password'];
+                
+                //$sql = "SELECT user, password FROM users WHERE user = $user and password = $password";
+                
+                //$pgquery = $db->prepare( $sql );
+                //$query->execute( [ $user, $password ] ); 
+                
+               // if ( $query )
+                //{ 
+                    # Do stuff 
+                  //  foreach( $query as $user ) 
+                    //{
+                       // echo "Sup, {$user['user']}"; 
+                    //} 
+                //}
+                    //-->
             if($valid){
               $_SESSION["login"] = "yes";
                // echo '<div class="row justify-content-center" style="font-size:1.5em;color:green" >The form has been submitted</div>';
